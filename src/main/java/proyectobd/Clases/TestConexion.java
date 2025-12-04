@@ -1,4 +1,4 @@
-package proyectobd;
+package proyectobd.Clases;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
