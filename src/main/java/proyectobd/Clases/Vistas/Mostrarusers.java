@@ -1,4 +1,4 @@
-package proyectobd.Clases;
+package proyectobd.Clases.Vistas;
 import java.lang.Thread.State;
 import java.sql.Connection;
 import java.sql.DriverManager;
