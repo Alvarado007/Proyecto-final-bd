@@ -2,19 +2,22 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package proyectobd.Clases;
+package proyectobd.Clases.Vistas;
+
+import javax.swing.JFrame;
 
 /**
  *
  * @author santi
  */
-public class VentanaLogin extends javax.swing.JFrame {
+public class VentanaLogin_copy extends javax.swing.JFrame {
 
     /**
      * Creates new form Login
      */
-    public VentanaLogin() {
+    public VentanaLogin_copy() {
         initComponents();
+        //this.setExtendedState(JFrame.MAXIMIZED_BOTH); // SIEMPRE pantalla completa
     }
 
     /**
@@ -48,7 +51,7 @@ public class VentanaLogin extends javax.swing.JFrame {
         jPanel1.setLayout(null);
 
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/proyectofinalbd/Usuario.png"))); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectobd/Imagenes/Usuario.png"))); // NOI18N
         jLabel4.setText("Contraseña:");
         jPanel1.add(jLabel4);
         jLabel4.setBounds(120, 200, 50, 50);
@@ -77,18 +80,18 @@ public class VentanaLogin extends javax.swing.JFrame {
         jButton1.setBounds(150, 140, 80, 40);
 
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/proyectofinalbd/Contraseña.png"))); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectobd/Imagenes/Contraseña.png"))); // NOI18N
         jPanel1.add(jLabel5);
         jLabel5.setBounds(120, 260, 50, 50);
 
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/proyectofinalbd/Logo.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectobd/Imagenes/Logo.png"))); // NOI18N
         jLabel1.setMaximumSize(new java.awt.Dimension(80, 80));
         jLabel1.setPreferredSize(new java.awt.Dimension(80, 80));
         jPanel1.add(jLabel1);
         jLabel1.setBounds(120, 30, 140, 120);
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/proyectofinalbd/Login.jpg"))); // NOI18N
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectobd/Imagenes/Login.jpg"))); // NOI18N
         jLabel6.setMaximumSize(new java.awt.Dimension(400, 355));
         jLabel6.setMinimumSize(new java.awt.Dimension(400, 355));
         jPanel1.add(jLabel6);
@@ -129,20 +132,20 @@ public class VentanaLogin extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VentanaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaLogin_copy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VentanaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaLogin_copy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VentanaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaLogin_copy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VentanaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaLogin_copy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VentanaLogin().setVisible(true);
+                new VentanaLogin_copy().setVisible(true);
             }
         });
     }
