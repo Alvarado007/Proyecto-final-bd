@@ -6,16 +6,22 @@ package proyectobd.Clases.Vistas;
 
 import javax.swing.JFrame;
 
+import proyectobd.Clases.Modelos.Login;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 /**
  *
  * @author santi
  */
-public class VentanaLogin_copy extends javax.swing.JFrame {
-
+public class VentanaLogin_copy extends javax.swing.JFrame implements ActionListener {
+    public Login modeloLogin;
     /**
      * Creates new form Login
      */
-    public VentanaLogin_copy() {
+    public VentanaLogin_copy(Login ventanaLogin) {
+        this.modeloLogin = ventanaLogin;
         initComponents();
         //this.setExtendedState(JFrame.MAXIMIZED_BOTH); // SIEMPRE pantalla completa
     }
@@ -76,6 +82,7 @@ public class VentanaLogin_copy extends javax.swing.JFrame {
         jButton1.setText("Login");
         jButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton1.setContentAreaFilled(false);
+        jButton1.addActionListener(this);
         jPanel1.add(jButton1);
         jButton1.setBounds(150, 140, 80, 40);
 
@@ -143,11 +150,11 @@ public class VentanaLogin_copy extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VentanaLogin_copy().setVisible(true);
-            }
-        });
+        // java.awt.EventQueue.invokeLater(new Runnable() {
+        //     public void run() {
+        //         new VentanaLogin_copy(ventanaLogin).setVisible(true);
+        //     }
+        // });
     }
 
     // Variables declaration - do not modify                     
@@ -159,5 +166,28 @@ public class VentanaLogin_copy extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
-    // End of variables declaration                   
+    // End of variables declaration  
+    
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == jButton1) {
+            // Aquí va el código que se ejecuta cuando se presiona el botón de login
+           int usuario = Integer.parseInt(jTextField1.getText());
+
+            String contraseña = jTextField2.getText();
+            String cargo = modeloLogin.verificarCredenciales(usuario, contraseña);
+            if (cargo != null) {
+                System.out.println("✅ Login exitoso");
+                System.out.println("Cargo del usuario: " + cargo);
+                this.dispose();
+                VentanaMenu ventanaMenu = new VentanaMenu();
+                ventanaMenu.setVisible(true);
+                // Lógica para abrir la siguiente ventana o funcionalidad
+            } else {
+                System.out.println("❌ Login fallido");
+                // Lógica para mostrar un mensaje de error
+            }
+            
+        }
+    }
 }
