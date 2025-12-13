@@ -36,6 +36,7 @@ public class VentanaGestionClientes extends javax.swing.JFrame implements Action
         Boton_editar = new Botontransparente("Editar");
         Boton_nuevo = new Botontransparente("Nuevo");
         Boton_refrescar = new Botontransparente("Refrescar");
+        Boton_regresar = new Botontransparente("Regresar");
         Nombre_ventana = new Labeltransparente("Clientes");
         jLabel6 = new javax.swing.JLabel();
         modelo = new javax.swing.table.DefaultTableModel(null, columnas){
@@ -79,19 +80,24 @@ public class VentanaGestionClientes extends javax.swing.JFrame implements Action
         jPanel1.add(Boton_buscar);
 
         Boton_editar.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-        Boton_editar.setBounds(235, 580, 200, 50);
+        Boton_editar.setBounds(235, 510, 200, 50);
         Boton_editar.addActionListener(this);
         jPanel1.add(Boton_editar);
 
         Boton_nuevo.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-        Boton_nuevo.setBounds(20, 580, 200, 50);
+        Boton_nuevo.setBounds(20, 510, 200, 50);
         Boton_nuevo.addActionListener(this);
         jPanel1.add(Boton_nuevo);
 
         Boton_refrescar.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-        Boton_refrescar.setBounds(450, 580, 200, 50);
+        Boton_refrescar.setBounds(450, 510, 200, 50);
         Boton_refrescar.addActionListener(this);
         jPanel1.add(Boton_refrescar);
+
+        Boton_regresar.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+        Boton_regresar.setBounds(240, 580, 200, 50);
+        Boton_regresar.addActionListener(this);
+        jPanel1.add(Boton_regresar);
 
         // jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         // jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectobd/Imagenes/Contraseña.png")));
@@ -162,6 +168,7 @@ public class VentanaGestionClientes extends javax.swing.JFrame implements Action
     private javax.swing.JButton Boton_editar;
     private javax.swing.JButton Boton_nuevo;
     private javax.swing.JButton Boton_refrescar;
+    private javax.swing.JButton Boton_regresar;
     private javax.swing.JLabel Nombre_ventana;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
@@ -190,6 +197,12 @@ public class VentanaGestionClientes extends javax.swing.JFrame implements Action
             for (Object[] fila : modeloClientes.obtenerUsuarios()) {
                 modelo.addRow(fila);
             }
+        }
+
+        else if (e.getSource() == Boton_regresar) {
+            VentanaMenu vm = new VentanaMenu();
+            this.dispose();
+            vm.setVisible(true);
         }
         
     }

@@ -10,6 +10,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 import proyectobd.Clases.Modelos.Clientesbd;
+import proyectobd.Clases.Modelos.Facturacionbd;
+import proyectobd.Clases.Modelos.Login;
 import proyectobd.Clases.Modelos.Pedidosbd;
 import proyectobd.Estetica.Botontransparente;
 import proyectobd.Estetica.Labeltransparente;
@@ -192,6 +194,19 @@ public class VentanaMenu extends javax.swing.JFrame implements ActionListener {
         else if (e.getSource() == Pedidos) {
             Pedidosbd modeloPedidos = new Pedidosbd();
             VentanaGestionPedidos va = new VentanaGestionPedidos(modeloPedidos);
+            this.dispose();
+            va.setVisible(true);
+        }
+        else if (e.getSource() == Cerrarsesion) {
+            Login l = new Login();
+            VentanaLogin_copy vl = new VentanaLogin_copy(l);
+            this.dispose();
+            vl.setVisible(true);
+        }
+
+        else if (e.getSource() == Facturacion) {
+            Facturacionbd modeloClientes = new Facturacionbd();
+            VentanaGestionFacturas va = new VentanaGestionFacturas(modeloClientes);
             this.dispose();
             va.setVisible(true);
         }
