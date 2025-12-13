@@ -64,14 +64,14 @@ public class VentanaLogin_copy extends javax.swing.JFrame implements ActionListe
 
         jTextField1.setBackground(new java.awt.Color(74, 74, 74));
         jTextField1.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField1.setText("jTextField1");
+        jTextField1.setText("1");
         jTextField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
         jPanel1.add(jTextField1);
         jTextField1.setBounds(220, 210, 90, 18);
 
         jTextField2.setBackground(new java.awt.Color(74, 74, 74));
         jTextField2.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField2.setText("jTextField2");
+        jTextField2.setText("1234");
         jTextField2.setBorder(null);
         jPanel1.add(jTextField2);
         jTextField2.setBounds(220, 280, 90, 16);

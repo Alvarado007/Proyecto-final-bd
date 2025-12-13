@@ -8,7 +8,7 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.ListSelectionModel;
 
-import proyectobd.Clases.Modelos.Clientesbd;
+import proyectobd.Clases.Modelos.Pedidosbd;
 import proyectobd.Estetica.Botontransparente;
 import proyectobd.Estetica.Campotextotransparente;
 import proyectobd.Estetica.Labeltransparente;
@@ -16,11 +16,11 @@ import proyectobd.Estetica.Labeltransparente;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class VentanaGestionClientes extends javax.swing.JFrame implements ActionListener {
-    private Clientesbd modeloClientes;
+public class VentanaGestionPedidos extends javax.swing.JFrame implements ActionListener {
+    private Pedidosbd modeloPedidos;
 
-    public VentanaGestionClientes(Clientesbd ventanaClientes) {
-        this.modeloClientes = ventanaClientes;
+    public VentanaGestionPedidos(Pedidosbd ventanaClientes) {
+        this.modeloPedidos = ventanaClientes;
         initComponents();
         this.setSize(675, 675); // NUEVO TAMAÑO
         this.setResizable(false); // Igual que el login
@@ -29,7 +29,7 @@ public class VentanaGestionClientes extends javax.swing.JFrame implements Action
 
     @SuppressWarnings("unchecked")
     private void initComponents() {
-        String[] columnas = {"Dni", "Nombre", "Telefono"};
+        String[] columnas = {"Num_pedido", "encargo", "entrega", "Abono", "Anotacion", "Dni_cliente"};
         jPanel1 = new javax.swing.JPanel();
         Texto_buscar = new Campotextotransparente(1);
         Boton_buscar = new Botontransparente("Buscar");
@@ -104,7 +104,7 @@ public class VentanaGestionClientes extends javax.swing.JFrame implements Action
         Nombre_ventana.setBounds(70, 20, 120, 40);
         Nombre_ventana.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-        for (Object[] fila : modeloClientes.obtenerUsuarios()) {
+        for (Object[] fila : modeloPedidos.obtenerPedidos()) {
             modelo.addRow(fila);
         }
 
@@ -122,7 +122,8 @@ public class VentanaGestionClientes extends javax.swing.JFrame implements Action
         jTable1.setSelectionBackground(new Color(30, 60, 120, 180));
         jTable1.setSelectionForeground(Color.WHITE);
         jTable1.getTableHeader().setReorderingAllowed(false);
-
+        jTable1.getColumnModel().getColumn(4).setPreferredWidth(150); // Para la columna 0 (Dni)
+        jTable1.getColumnModel().getColumn(5).setPreferredWidth(150);
 
         jPanel1.add(scroll);
         
@@ -169,25 +170,25 @@ public class VentanaGestionClientes extends javax.swing.JFrame implements Action
     private javax.swing.table.DefaultTableModel modelo;
     private javax.swing.JTable jTable1;
     private javax.swing.JScrollPane scroll;
-    // End of variables declaration
 
     @Override
     public void actionPerformed(ActionEvent e) {
         // TODO Auto-generated method stub
         if (e.getSource() == Boton_buscar) {
-            String cliente_buscar = Texto_buscar.getText();
+            int pedido_buscar = Integer.parseInt(Texto_buscar.getText());
             modelo.setRowCount(0);
-            for (Object[] fila : modeloClientes.BuscarCliente(cliente_buscar)) {
+            for (Object[] fila : modeloPedidos.BuscarPedido(pedido_buscar)) {
                 modelo.addRow(fila);
             }
         }
+
         // else if (e.getSource() == Boton_nuevo) {
-        //     VentanaAgregarCliente va = new VentanaAgregarCliente(modeloClientes, this);
+        //     VentanaAgregarPedidos va = new VentanaAgregarPedidos(modeloPedidos, this);
         //     va.setVisible(true);
         // }
         else if (e.getSource() == Boton_refrescar) {
             modelo.setRowCount(0);
-            for (Object[] fila : modeloClientes.obtenerUsuarios()) {
+            for (Object[] fila : modeloPedidos.obtenerPedidos()) {
                 modelo.addRow(fila);
             }
         }
