@@ -272,5 +272,11 @@ public class VentanaMenu extends javax.swing.JFrame implements ActionListener {
             this.dispose();
             va.setVisible(true);
         }
+
+        else if (e.getSource() == Reportes) {
+            VentanaReportes va = new VentanaReportes(usuarioActual);
+            this.dispose();
+            va.setVisible(true);
+        }
     }
 }

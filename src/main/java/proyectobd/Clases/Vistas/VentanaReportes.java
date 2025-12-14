@@ -4,21 +4,27 @@
  */
 package proyectobd.Clases.Vistas;
 
+import proyectobd.Clases.Modelos.Colegiosbd;
 import proyectobd.Clases.Modelos.Reportesbd;
 import javax.swing.table.DefaultTableModel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  *
  * @author Equipo Hogar
  */
-public class VentanaReportes extends javax.swing.JFrame {
+public class VentanaReportes extends javax.swing.JFrame implements ActionListener {
     
     public Reportesbd modeloReportes = new Reportesbd();
+    public Colegiosbd modelocolegios = new Colegiosbd();
+    public String usuarioActual;
 
     // Declaramos los modelos aquí para poder usarlos en las consultas SQL
     DefaultTableModel modelPendientes;
@@ -33,7 +39,8 @@ public class VentanaReportes extends javax.swing.JFrame {
     /**
      * Creates new form VentanaReportes
      */
-    public VentanaReportes() {
+    public VentanaReportes(String usuarioActual) {
+        this.usuarioActual = usuarioActual;
         initComponents(); // Carga la interfaz gráfica
         initTabListener(); // Carga el detector de cambio de pestaña
         
@@ -117,37 +124,48 @@ public class VentanaReportes extends javax.swing.JFrame {
 
     private void cargarDatosColegios() {
         modelColegios.setRowCount(0);
-        System.out.println("Cargando SQL para Colegios...");
+        for (Object[] fila : modeloReportes.Reporte4()) {
+            modelColegios.addRow(fila);
+        }
         // TODO: AQUÍ VA TU CÓDIGO SQL PARA LLENAR jTable4 / modelColegios
     }
 
-    private void cargarDatosUniformes() {
+    private void cargarDatosUniformes() { //busqueda
         modelUniformes.setRowCount(0);
-        System.out.println("Cargando SQL para Uniformes...");
+        for (Object[] fila : modeloReportes.Reporteaux()) {
+            modelUniformes.addRow(fila);
+        }
         // TODO: AQUÍ VA TU CÓDIGO SQL PARA LLENAR jTable5 / modelUniformes
     }
 
     private void cargarDatosProdPorColegio() {
         modelProductosColegio.setRowCount(0);
-        System.out.println("Cargando SQL para Productos por Colegio...");
+        for (Object[] fila : modeloReportes.Reporte6()) {
+            modelProductosColegio.addRow(fila);
+        }
         // TODO: AQUÍ VA TU CÓDIGO SQL PARA LLENAR jTable6 / modelProductosColegio
     }
 
-    private void cargarDatosTotalVentas() {
-        System.out.println("Calculando Total Ventas...");
+    private void cargarDatosTotalVentas() { //ventas
+        List<Object[]> resultado = modeloReportes.Reporte7();
+        jLabel2.setText(resultado.get(0)[0].toString());
         // TODO: AQUÍ TU LOGICA PARA CALCULAR EL TOTAL Y PONERLO EN EL JLABEL
         // jLabel2.setText("$$$");
     }
 
     private void cargarDatosDeudores() {
         modelDeudores.setRowCount(0);
-        System.out.println("Cargando SQL para Deudores...");
+        for (Object[] fila : modeloReportes.Reporte8()) {
+            modelDeudores.addRow(fila);
+        }
         // TODO: AQUÍ VA TU CÓDIGO SQL PARA LLENAR jTable7 / modelDeudores
     }
 
     private void cargarDatosAtrasados() {
         modelAtrasados.setRowCount(0);
-        System.out.println("Cargando SQL para Atrasados...");
+        for (Object[] fila : modeloReportes.Reporte9()) {
+            modelAtrasados.addRow(fila);
+        }
         // TODO: AQUÍ VA TU CÓDIGO SQL PARA LLENAR jTable8 / modelAtrasados
     }
 
@@ -326,7 +344,7 @@ public class VentanaReportes extends javax.swing.JFrame {
         // CORRECCION: Inicialización con 0 filas
         modelUniformes = new DefaultTableModel(
             new Object [][] {},
-            new String [] { "Nombre", "Tipo", "Color", "Tipo Tela", "Bordado Nombre", "Escudo" }
+            new String [] { "Colegio", "Nombre", "Tipo", "Color", "Tipo Tela", "Bordado Nombre", "Escudo" }
         );
         jTable5.setModel(modelUniformes);
         jScrollPane5.setViewportView(jTable5);
@@ -336,6 +354,7 @@ public class VentanaReportes extends javax.swing.JFrame {
 
         jButton2.setBackground(new java.awt.Color(102, 255, 255));
         jButton2.setText("Buscar");
+        jButton2.addActionListener(this);
 
         javax.swing.GroupLayout panelUniformesColegioLayout = new javax.swing.GroupLayout(panelUniformesColegio);
         panelUniformesColegio.setLayout(panelUniformesColegioLayout);
@@ -489,10 +508,12 @@ public class VentanaReportes extends javax.swing.JFrame {
         ButtonRefrescar.setText("Refrescar");
         PanelFondoMenuPrincipalAdmin.add(ButtonRefrescar);
         ButtonRefrescar.setBounds(460, 610, 200, 50);
+        ButtonRefrescar.addActionListener(this);
 
         ButtonRegresar.setText("Regresar");
         PanelFondoMenuPrincipalAdmin.add(ButtonRegresar);
         ButtonRegresar.setBounds(240, 610, 200, 50);
+        ButtonRegresar.addActionListener(this);
 
         LabelFondoMenuAdmin.setBackground(new java.awt.Color(102, 102, 102));
         LabelFondoMenuAdmin.setOpaque(true);
@@ -516,37 +537,37 @@ public class VentanaReportes extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VentanaReportes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VentanaReportes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VentanaReportes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VentanaReportes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    // public static void main(String args[]) {
+    //     /* Set the Nimbus look and feel */
+    //     //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+    //     /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+    //      * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+    //      */
+    //     try {
+    //         for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+    //             if ("Nimbus".equals(info.getName())) {
+    //                 javax.swing.UIManager.setLookAndFeel(info.getClassName());
+    //                 break;
+    //             }
+    //         }
+    //     } catch (ClassNotFoundException ex) {
+    //         java.util.logging.Logger.getLogger(VentanaReportes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    //     } catch (InstantiationException ex) {
+    //         java.util.logging.Logger.getLogger(VentanaReportes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    //     } catch (IllegalAccessException ex) {
+    //         java.util.logging.Logger.getLogger(VentanaReportes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    //     } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+    //         java.util.logging.Logger.getLogger(VentanaReportes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    //     }
+    //     //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VentanaReportes().setVisible(true);
-            }
-        });
-    }
+    //     /* Create and display the form */
+    //     java.awt.EventQueue.invokeLater(new Runnable() {
+    //         public void run() {
+    //             new VentanaReportes().setVisible(true);
+    //         }
+    //     });
+    // }
 
     // Variables declaration - do not modify                     
     private javax.swing.JButton ButtonRefrescar;
@@ -583,5 +604,31 @@ public class VentanaReportes extends javax.swing.JFrame {
     private javax.swing.JPanel panelTotalVentas;
     private javax.swing.JPanel panelUniformesColegio;
     private javax.swing.JPanel panelinventarioProductos;
-    // End of variables declaration                   
+    // End of variables declaration 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        // Aquí puedes manejar los eventos de los botones si es necesario
+        if (e.getSource() == ButtonRegresar) {
+            VentanaMenu menu = new VentanaMenu(usuarioActual);
+            menu.setVisible(true);
+            this.dispose();
+        }
+        if (e.getSource() == jButton2) {
+            // Acción para el botón de búsqueda en Uniformes por Colegio
+            modelUniformes.setRowCount(0);
+            int id_colegio = Integer.parseInt(jTextField1.getText());
+            for (Object[] fila : modeloReportes.ReporteBusqueda(id_colegio)) {
+            modelUniformes.addRow(fila);
+            }
+
+            
+            // Aquí puedes agregar la lógica para filtrar los datos según el criterio de búsqueda
+        }
+
+        if (e.getSource() == ButtonRefrescar) {
+            VentanaReportes ventana = new VentanaReportes(usuarioActual);
+            this.dispose();
+            ventana.setVisible(true);
+        }
+    }
 }

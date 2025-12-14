@@ -79,5 +79,24 @@ public class Colegiosbd {
             e.printStackTrace();
         }
     }
+
+    public List<Object[]> obtenerNombres() {
+        List<Object[]> datos = new ArrayList<>();
+        try{
+            Connection con = DriverManager.getConnection(url, user, password);
+            PreparedStatement ps = con.prepareStatement("SELECT nombre * FROM Colegio");
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                datos.add(new Object[]{
+                    rs.getString("nombre"),
+                });
+            }
+
+            return datos;
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }
 

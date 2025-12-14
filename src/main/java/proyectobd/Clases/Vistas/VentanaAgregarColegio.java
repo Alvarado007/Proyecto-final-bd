@@ -54,8 +54,8 @@ public class VentanaAgregarColegio extends javax.swing.JFrame implements ActionL
         Cambio2 = new Campotextotransparente(1);
         Boton_guardar = new Botontransparente("Guardar");
         Boton_cancelar = new Botontransparente("Cancelar");
-        Nombre_ventana = new Labeltransparente("Clientes");
-        Label_cambio1 = new Labeltransparente("Dni");
+        Nombre_ventana = new Labeltransparente("Colegios");
+        Label_cambio1 = new Labeltransparente("ID Colegio");
         Label_cambio2 = new Labeltransparente("Nombre");
         
         jLabel6 = new javax.swing.JLabel();

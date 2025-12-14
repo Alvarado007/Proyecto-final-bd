@@ -39,7 +39,9 @@ public class Reportesbd {
         List<Object[]> datos = new ArrayList<>();
         try{
             Connection con = DriverManager.getConnection(url, user, password);
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM Colegio WHERE id_colegio = ?");
+            PreparedStatement ps = con.prepareStatement("SELECT C.ID_COLEGIO, C.NOMBRE, U.TIPO, U.COLOR, U.TIPOTELA, U.BORDADONOMBRE, U.ESCUDO\r\n" + //
+                                "FROM COLEGIO C INNER JOIN UNIFORME U ON C.ID_COLEGIO = U.ID_COLEGIO\r\n" + //
+                                "WHERE C.ID_COLEGIO = ?");
             ps.setInt(1, idcolegio);
             ResultSet rs = ps.executeQuery();
 
@@ -47,6 +49,37 @@ public class Reportesbd {
                 datos.add(new Object[]{
                     rs.getInt("id_colegio"),
                     rs.getString("nombre"),
+                    rs.getString("tipo"),
+                    rs.getString("color"),
+                    rs.getString("tipotela"),
+                    rs.getString("bordadonombre"),
+                    rs.getString("escudo"),
+                });
+            }
+
+            return datos;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public List<Object[]> Reporteaux() {
+        List<Object[]> datos = new ArrayList<>();
+        try{
+            Connection con = DriverManager.getConnection(url, user, password);
+            PreparedStatement ps = con.prepareStatement("SELECT C.ID_COLEGIO, C.NOMBRE, U.TIPO, U.COLOR, U.TIPOTELA, U.BORDADONOMBRE, U.ESCUDO\r\n" + //
+                                "FROM COLEGIO C INNER JOIN UNIFORME U ON C.ID_COLEGIO = U.ID_COLEGIO");
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                datos.add(new Object[]{
+                    rs.getInt("ID_COLEGIO"),
+                    rs.getString("NOMBRE"),
+                    rs.getString("TIPO"),
+                    rs.getString("COLOR"),
+                    rs.getString("TIPOTELA"),
+                    rs.getString("BORDADONOMBRE"),
+                    rs.getString("ESCUDO"),
                 });
             }
 
@@ -129,13 +162,96 @@ public class Reportesbd {
         List<Object[]> datos = new ArrayList<>();
         try{
             Connection con = DriverManager.getConnection(url, user, password);
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM Colegio");
+            PreparedStatement ps = con.prepareStatement("SELECT C.NOMBRE, COUNT(PT.CODIGO)\r\n" + //
+                                "FROM COLEGIO C INNER JOIN UNIFORME U ON C.ID_COLEGIO = U.ID_COLEGIO\r\n" + //
+                                "INNER JOIN PRODUCTO_UNIFORME PU ON U.CODUNIFORME = PU.CODPRODUCTOUNIFORME\r\n" + //
+                                "INNER JOIN PRODUCTOS_TERMINADOS PT ON PU.CODIGOPRODUCTOTERMINADO = PT.CODIGO\r\n" + //
+                                "WHERE PT.NUMPEDIDO IS NOT NULL\r\n" + //
+                                "GROUP BY C.NOMBRE\r\n" + //
+                                "ORDER BY count(PT.CODIGO) DESC");
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
                 datos.add(new Object[]{
-                    rs.getInt("id_colegio"),
-                    rs.getString("nombre"),
+                    rs.getString("NOMBRE"),
+                    rs.getInt("count"),
+                });
+            }
+
+            return datos;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public List<Object[]> Reporte7() {
+        List<Object[]> datos = new ArrayList<>();
+        try{
+            Connection con = DriverManager.getConnection(url, user, password);
+            PreparedStatement ps = con.prepareStatement("SELECT  SUM(Total)\r\n" + //
+                                "FROM FACTURA\r\n" + //
+                                "WHERE Estado ILIKE '%PAGADA%'");
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                datos.add(new Object[]{
+                    rs.getInt("sum"),
+                });
+            }
+
+            return datos;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public List<Object[]> Reporte8() {
+        List<Object[]> datos = new ArrayList<>();
+        try{
+            Connection con = DriverManager.getConnection(url, user, password);
+            PreparedStatement ps = con.prepareStatement("SELECT C.NOMBRE, P.NUMPEDIDO, F.TOTAL TOTAL_FACTURA, P.ABONO ,(F.TOTAL - P.ABONO) AS SALDO_PENDIENTE\r\n" + //
+                                "FROM CLIENTE C INNER JOIN PEDIDO P ON C.DNI = P.DNI_CLIENTE \r\n" + //
+                                "INNER JOIN FACTURA F ON P.NUMPEDIDO = F.NUMPEDIDO\r\n" + //
+                                "WHERE (F.TOTAL - P.ABONO) > 0\r\n" + //
+                                "ORDER BY C.NOMBRE ASC");
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                datos.add(new Object[]{
+                    rs.getString("NOMBRE"),
+                    rs.getInt("NUMPEDIDO"),
+                    rs.getInt("TOTAL_FACTURA"),
+                    rs.getInt("ABONO"),
+                    rs.getInt("SALDO_PENDIENTE"),
+                });
+            }
+
+            return datos;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public List<Object[]> Reporte9() {
+        List<Object[]> datos = new ArrayList<>();
+        try{
+            Connection con = DriverManager.getConnection(url, user, password);
+            PreparedStatement ps = con.prepareStatement("SELECT P.NUMPEDIDO, C.NOMBRE, P.FECHAENCARGO,\r\n" + //
+                                "       CURRENT_DATE - P.FECHAENCARGO AS DIAS_ATRASO, Current_date as FECHASISTEMA\r\n" + //
+                                "FROM PEDIDO P \r\n" + //
+                                "INNER JOIN CLIENTE C ON P.DNI_CLIENTE = C.DNI\r\n" + //
+                                "WHERE P.FECHAENTREGA IS NULL \r\n" + //
+                                "AND P.FECHAENCARGO < CURRENT_DATE\r\n" + //
+                                "ORDER BY C.NOMBRE ASC");
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                datos.add(new Object[]{
+                    rs.getInt("NUMPEDIDO"),
+                    rs.getString("NOMBRE"),
+                    rs.getString("FECHAENCARGO"),
+                    rs.getInt("DIAS_ATRASO"),
+                    rs.getString("FECHASISTEMA"),
                 });
             }
 

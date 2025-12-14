@@ -33,7 +33,7 @@ public class VentanaGestionUniformes extends javax.swing.JFrame implements Actio
 
     @SuppressWarnings("unchecked")
     private void initComponents() {
-        String[] columnas = {"id","tipo","color","tipo_tela","bordado","escudo","idcolegio"};
+        String[] columnas = {"codUniforme","tipo","color","tipo_tela","bordado","escudo","idcolegio"};
         jPanel1 = new javax.swing.JPanel();
         Texto_buscar = new Campotextotransparente(1);
         Boton_buscar = new Botontransparente("Buscar");
@@ -41,7 +41,7 @@ public class VentanaGestionUniformes extends javax.swing.JFrame implements Actio
         Boton_nuevo = new Botontransparente("Nuevo");
         Boton_refrescar = new Botontransparente("Refrescar");
         Boton_regresar = new Botontransparente("Regresar");
-        Nombre_ventana = new Labeltransparente("Colegios");
+        Nombre_ventana = new Labeltransparente("Uniformes");
         jLabel6 = new javax.swing.JLabel();
         modelo = new javax.swing.table.DefaultTableModel(null, columnas){
             @Override

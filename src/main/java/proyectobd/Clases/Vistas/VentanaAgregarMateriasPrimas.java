@@ -61,11 +61,11 @@ public class VentanaAgregarMateriasPrimas extends javax.swing.JFrame implements 
         Boton_guardar = new Botontransparente("Guardar");
         Boton_cancelar = new Botontransparente("Cancelar");
         Nombre_ventana = new Labeltransparente("Materias Primas");
-        Label_cambio1 = new Labeltransparente("nit");
-        Label_cambio2 = new Labeltransparente("nombre");
-        Label_cambio3 = new Labeltransparente("direccion");
-        Label_cambio4 = new Labeltransparente("telefono");
-        Label_cambio5 = new Labeltransparente("nombreContacto");
+        Label_cambio1 = new Labeltransparente("codigo");
+        Label_cambio2 = new Labeltransparente("tipo");
+        Label_cambio3 = new Labeltransparente("descripcion");
+        Label_cambio4 = new Labeltransparente("cantidad");
+        Label_cambio5 = new Labeltransparente("unidad_medida");
         
         jLabel6 = new javax.swing.JLabel();
 
