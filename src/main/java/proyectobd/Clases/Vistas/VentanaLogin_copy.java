@@ -180,7 +180,7 @@ public class VentanaLogin_copy extends javax.swing.JFrame implements ActionListe
                 System.out.println("✅ Login exitoso");
                 System.out.println("Cargo del usuario: " + cargo);
                 this.dispose();
-                VentanaMenu ventanaMenu = new VentanaMenu();
+                VentanaMenu ventanaMenu = new VentanaMenu(cargo);
                 ventanaMenu.setVisible(true);
                 // Lógica para abrir la siguiente ventana o funcionalidad
             } else {

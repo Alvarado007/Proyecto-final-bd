@@ -27,14 +27,27 @@ import java.awt.event.ActionListener;
 
 
 public class VentanaMenu extends javax.swing.JFrame implements ActionListener {
+    private String usuarioActual;
 
-    public VentanaMenu() {
+    public VentanaMenu(String usuarioActual) {
+        this.usuarioActual = usuarioActual;
         initComponents();
+        OcultarBotones();
         this.setSize(675, 675); // NUEVO TAMAÑO
         this.setResizable(false); // Igual que el login
         this.setLocationRelativeTo(null); // Centrar ventana
     }
+    public void OcultarBotones(){
+        if (!usuarioActual.equals("Admin")){
+            Usuarios.setVisible(false);
+            Productos_terminados.setVisible(false);
+            Proveedores.setVisible(false);
+            Materias_primas.setVisible(false);
+            Colegios.setVisible(false);
+            Uniformes.setVisible(false);
 
+        }
+    }
     @SuppressWarnings("unchecked")
     private void initComponents() {
 
@@ -165,13 +178,13 @@ public class VentanaMenu extends javax.swing.JFrame implements ActionListener {
         pack();
     }
 
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VentanaMenu().setVisible(true);
-            }
-        });
-    }
+    // public static void main(String args[]) {
+    //     java.awt.EventQueue.invokeLater(new Runnable() {
+    //         public void run() {
+    //             new VentanaMenu().setVisible(true);
+    //         }
+    //     });
+    // }
 
     // Variables declaration
     private javax.swing.JButton Clientes;
@@ -193,13 +206,13 @@ public class VentanaMenu extends javax.swing.JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == Clientes) {
             Clientesbd clb = new Clientesbd();
-            VentanaGestionClientes vl = new VentanaGestionClientes(clb);
+            VentanaGestionClientes vl = new VentanaGestionClientes(clb,usuarioActual);
             this.dispose();
             vl.setVisible(true);
         }
         else if (e.getSource() == Pedidos) {
             Pedidosbd modeloPedidos = new Pedidosbd();
-            VentanaGestionPedidos va = new VentanaGestionPedidos(modeloPedidos);
+            VentanaGestionPedidos va = new VentanaGestionPedidos(modeloPedidos,usuarioActual);
             this.dispose();
             va.setVisible(true);
         }
@@ -212,49 +225,49 @@ public class VentanaMenu extends javax.swing.JFrame implements ActionListener {
 
         else if (e.getSource() == Facturacion) {
             Facturacionbd modeloClientes = new Facturacionbd();
-            VentanaGestionFacturas va = new VentanaGestionFacturas(modeloClientes);
+            VentanaGestionFacturas va = new VentanaGestionFacturas(modeloClientes,usuarioActual);
             this.dispose();
             va.setVisible(true);
         }
 
         else if (e.getSource() == Colegios) {
             Colegiosbd modeloClientes = new Colegiosbd();
-            VentanaGestionColegios va = new VentanaGestionColegios(modeloClientes);
+            VentanaGestionColegios va = new VentanaGestionColegios(modeloClientes,usuarioActual);
             this.dispose();
             va.setVisible(true);
         }
 
         else if (e.getSource() == Materias_primas) {
             MateriasPrimasbd modeloClientes = new MateriasPrimasbd();
-            VentanaGestionMateriasprimas va = new VentanaGestionMateriasprimas(modeloClientes);
+            VentanaGestionMateriasprimas va = new VentanaGestionMateriasprimas(modeloClientes,usuarioActual);
             this.dispose();
             va.setVisible(true);
         }
 
         else if (e.getSource() == Uniformes) {
             Uniformesbd modeloClientes = new Uniformesbd();
-            VentanaGestionUniformes va = new VentanaGestionUniformes(modeloClientes);
+            VentanaGestionUniformes va = new VentanaGestionUniformes(modeloClientes,usuarioActual);
             this.dispose();
             va.setVisible(true);
         }
         
         else if (e.getSource() == Proveedores) {
             Proveedoresbd modeloClientes = new Proveedoresbd();
-            VentanaGestionProveedores va = new VentanaGestionProveedores(modeloClientes);
+            VentanaGestionProveedores va = new VentanaGestionProveedores(modeloClientes,usuarioActual);
             this.dispose();
             va.setVisible(true);
         }
 
         else if (e.getSource() == Productos_terminados) {
             ProductosTerminadosbd modeloClientes = new ProductosTerminadosbd();
-            VentanaGestionProductosTerminados va = new VentanaGestionProductosTerminados(modeloClientes);
+            VentanaGestionProductosTerminados va = new VentanaGestionProductosTerminados(modeloClientes,usuarioActual);
             this.dispose();
             va.setVisible(true);
         }
 
         else if (e.getSource() == Usuarios) {
             Usuariosbd modeloClientes = new Usuariosbd();
-            VentanaGestionUsuarios va = new VentanaGestionUsuarios(modeloClientes);
+            VentanaGestionUsuarios va = new VentanaGestionUsuarios(modeloClientes,usuarioActual);
             this.dispose();
             va.setVisible(true);
         }

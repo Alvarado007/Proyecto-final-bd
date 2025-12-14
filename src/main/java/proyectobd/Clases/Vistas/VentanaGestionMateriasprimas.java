@@ -20,8 +20,10 @@ import java.awt.event.ActionListener;
 
 public class VentanaGestionMateriasprimas extends javax.swing.JFrame implements ActionListener {
     private MateriasPrimasbd modeloClientes;
+    private String usuarioActual;
 
-    public VentanaGestionMateriasprimas(MateriasPrimasbd ventanaClientes) {
+    public VentanaGestionMateriasprimas(MateriasPrimasbd ventanaClientes, String usuarioActual) {
+        this.usuarioActual = usuarioActual;
         this.modeloClientes = ventanaClientes;
         initComponents();
         this.setSize(675, 675); // NUEVO TAMAÑO
@@ -202,7 +204,7 @@ public class VentanaGestionMateriasprimas extends javax.swing.JFrame implements 
         }
 
         else if (e.getSource() == Boton_regresar) {
-            VentanaMenu vm = new VentanaMenu();
+            VentanaMenu vm = new VentanaMenu(usuarioActual);
             this.dispose();
             vm.setVisible(true);
         }
@@ -214,14 +216,14 @@ public class VentanaGestionMateriasprimas extends javax.swing.JFrame implements 
                 datos.add(jTable1.getValueAt(fila, col).toString());
             }
             System.out.println(datos);
-            VentanaAgregarMateriasPrimas va = new VentanaAgregarMateriasPrimas(modeloClientes, "Editar");
+            VentanaAgregarMateriasPrimas va = new VentanaAgregarMateriasPrimas(modeloClientes, "Editar",usuarioActual);
             va.setDatosActuales(datos);
             this.dispose();
             va.setVisible(true);
         }
 
         else if (e.getSource() == Boton_nuevo) {
-            VentanaAgregarMateriasPrimas va = new VentanaAgregarMateriasPrimas(modeloClientes, "Nuevo");
+            VentanaAgregarMateriasPrimas va = new VentanaAgregarMateriasPrimas(modeloClientes, "Nuevo",usuarioActual);
             this.dispose();
             va.setVisible(true);
         }

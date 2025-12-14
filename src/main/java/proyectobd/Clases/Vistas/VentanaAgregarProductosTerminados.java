@@ -23,9 +23,11 @@ import java.util.ArrayList;
 public class VentanaAgregarProductosTerminados extends javax.swing.JFrame implements ActionListener {
     private ProductosTerminadosbd modeloClientes;
     private String Modo;
+    private String usuarioActual;
     private ArrayList<String> DatosActuales;
 
-    public VentanaAgregarProductosTerminados(ProductosTerminadosbd ventanaClientes, String modo) {
+    public VentanaAgregarProductosTerminados(ProductosTerminadosbd ventanaClientes, String modo, String usuarioActual) {
+        this.usuarioActual = usuarioActual;
         this.Modo = modo;
         this.modeloClientes = ventanaClientes;
         initComponents();
@@ -250,7 +252,7 @@ public class VentanaAgregarProductosTerminados extends javax.swing.JFrame implem
                 BigDecimal precio = new BigDecimal(Cambio5.getText());
                 int num_pedido = Integer.parseInt(Cambio6.getText());
                 modeloClientes.editarProductosTerminados(codigo, descripcion, talla, sexo, precio, num_pedido);
-                VentanaGestionProductosTerminados va = new VentanaGestionProductosTerminados(modeloClientes);
+                VentanaGestionProductosTerminados va = new VentanaGestionProductosTerminados(modeloClientes, usuarioActual);
                 this.dispose();
                 va.setVisible(true);
             }
@@ -262,13 +264,13 @@ public class VentanaAgregarProductosTerminados extends javax.swing.JFrame implem
                 BigDecimal precio = new BigDecimal(Cambio5.getText());
                 int num_pedido = Integer.parseInt(Cambio6.getText());
                 modeloClientes.agregarProductosTerminados(codigo, descripcion, talla, sexo, precio, num_pedido);
-                VentanaGestionProductosTerminados va = new VentanaGestionProductosTerminados(modeloClientes);
+                VentanaGestionProductosTerminados va = new VentanaGestionProductosTerminados(modeloClientes, usuarioActual);
                 this.dispose();
                 va.setVisible(true);
             }
         }
         else if (e.getSource() == Boton_cancelar) {
-            VentanaGestionProductosTerminados va = new VentanaGestionProductosTerminados(modeloClientes);
+            VentanaGestionProductosTerminados va = new VentanaGestionProductosTerminados(modeloClientes, usuarioActual);
             this.dispose();
             va.setVisible(true);
         }

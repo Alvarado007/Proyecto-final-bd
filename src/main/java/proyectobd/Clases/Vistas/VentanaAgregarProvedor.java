@@ -22,9 +22,11 @@ import java.util.ArrayList;
 public class VentanaAgregarProvedor extends javax.swing.JFrame implements ActionListener {
     private Proveedoresbd modeloClientes;
     private String Modo;
+    private String usuarioActual;
     private ArrayList<String> DatosActuales;
 
-    public VentanaAgregarProvedor(Proveedoresbd ventanaClientes, String modo) {
+    public VentanaAgregarProvedor(Proveedoresbd ventanaClientes, String modo, String usuarioActual) {
+        this.usuarioActual = usuarioActual;
         this.Modo = modo;
         this.modeloClientes = ventanaClientes;
         initComponents();
@@ -237,7 +239,7 @@ public class VentanaAgregarProvedor extends javax.swing.JFrame implements Action
                 String telefono = Cambio4.getText();
                 String nombreContacto = Cambio5.getText();
                 modeloClientes.editarProveedor(NIT, nombre, direccion, telefono, nombreContacto);
-                VentanaGestionProveedores va = new VentanaGestionProveedores(modeloClientes);
+                VentanaGestionProveedores va = new VentanaGestionProveedores(modeloClientes, usuarioActual);
                 this.dispose();
                 va.setVisible(true);
             }
@@ -249,13 +251,13 @@ public class VentanaAgregarProvedor extends javax.swing.JFrame implements Action
                 String nombreContacto = Cambio5.getText();
                 
                 modeloClientes.agregarProveedor(nit, nombre, direccion, telefono, nombreContacto);
-                VentanaGestionProveedores va = new VentanaGestionProveedores(modeloClientes);
+                VentanaGestionProveedores va = new VentanaGestionProveedores(modeloClientes, usuarioActual);
                 this.dispose();
                 va.setVisible(true);
             }
         }
         else if (e.getSource() == Boton_cancelar) {
-            VentanaGestionProveedores va = new VentanaGestionProveedores(modeloClientes);
+            VentanaGestionProveedores va = new VentanaGestionProveedores(modeloClientes, usuarioActual);
             this.dispose();
             va.setVisible(true);
         }

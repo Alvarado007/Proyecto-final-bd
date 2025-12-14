@@ -23,9 +23,11 @@ import java.util.ArrayList;
 public class VentanaAgregarFactura extends javax.swing.JFrame implements ActionListener {
     private Facturacionbd modeloClientes;
     private String Modo;
+    private String usuarioActual;
     private ArrayList<String> DatosActuales;
 
-    public VentanaAgregarFactura(Facturacionbd ventanaClientes, String modo) {
+    public VentanaAgregarFactura(Facturacionbd ventanaClientes, String modo, String usuarioActual) {
+        this.usuarioActual = usuarioActual;
         this.Modo = modo;
         this.modeloClientes = ventanaClientes;
         initComponents();
@@ -217,7 +219,7 @@ public class VentanaAgregarFactura extends javax.swing.JFrame implements ActionL
                 int total = Integer.parseInt(Cambio3.getText());
                 int num_pedido = Integer.parseInt(Cambio4.getText());
                 modeloClientes.editarFactura(idfactura, estado, total, num_pedido);
-                VentanaGestionFacturas va = new VentanaGestionFacturas(modeloClientes);
+                VentanaGestionFacturas va = new VentanaGestionFacturas(modeloClientes, usuarioActual);
                 this.dispose();
                 va.setVisible(true);
             }
@@ -228,13 +230,13 @@ public class VentanaAgregarFactura extends javax.swing.JFrame implements ActionL
                 int num_pedido = Integer.parseInt(Cambio4.getText());
                 modeloClientes.agregarFactura(id_factura, estado, total, num_pedido);
                 
-                VentanaGestionFacturas va = new VentanaGestionFacturas(modeloClientes);
+                VentanaGestionFacturas va = new VentanaGestionFacturas(modeloClientes, usuarioActual);
                 this.dispose();
                 va.setVisible(true);
             }
         }
         else if (e.getSource() == Boton_cancelar) {
-            VentanaGestionFacturas va = new VentanaGestionFacturas(modeloClientes);
+            VentanaGestionFacturas va = new VentanaGestionFacturas(modeloClientes, usuarioActual);
             this.dispose();
             va.setVisible(true);
         }

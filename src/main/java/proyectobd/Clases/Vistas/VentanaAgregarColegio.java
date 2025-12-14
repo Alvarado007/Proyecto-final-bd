@@ -22,9 +22,11 @@ import java.util.ArrayList;
 public class VentanaAgregarColegio extends javax.swing.JFrame implements ActionListener {
     private Colegiosbd modeloClientes;
     private String Modo;
+    private String usuarioActual;
     private ArrayList<String> DatosActuales;
 
-    public VentanaAgregarColegio(Colegiosbd ventanaClientes, String modo) {
+    public VentanaAgregarColegio(Colegiosbd ventanaClientes, String modo, String usuarioActual) {
+        this.usuarioActual = usuarioActual;
         this.Modo = modo;
         this.modeloClientes = ventanaClientes;
         initComponents();
@@ -181,7 +183,7 @@ public class VentanaAgregarColegio extends javax.swing.JFrame implements ActionL
                 int idcolegio = Integer.parseInt(Cambio1.getText());
                 String nombre = Cambio2.getText();
                 modeloClientes.editarColegio(idcolegio, nombre);
-                VentanaGestionColegios va = new VentanaGestionColegios(modeloClientes);
+                VentanaGestionColegios va = new VentanaGestionColegios(modeloClientes, usuarioActual);
                 this.dispose();
                 va.setVisible(true);
             }
@@ -189,13 +191,13 @@ public class VentanaAgregarColegio extends javax.swing.JFrame implements ActionL
                 int idcolegio = Integer.parseInt(Cambio1.getText());
                 String nombre = Cambio2.getText();
                 modeloClientes.agregarColegio(idcolegio, nombre);
-                VentanaGestionColegios va = new VentanaGestionColegios(modeloClientes);
+                VentanaGestionColegios va = new VentanaGestionColegios(modeloClientes, usuarioActual);
                 this.dispose();
                 va.setVisible(true);
             }
         }
         else if (e.getSource() == Boton_cancelar) {
-            VentanaGestionColegios va = new VentanaGestionColegios(modeloClientes);
+            VentanaGestionColegios va = new VentanaGestionColegios(modeloClientes, usuarioActual);
             this.dispose();
             va.setVisible(true);
         }

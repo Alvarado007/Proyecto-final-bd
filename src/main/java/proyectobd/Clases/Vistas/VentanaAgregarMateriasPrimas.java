@@ -22,9 +22,11 @@ import java.util.ArrayList;
 public class VentanaAgregarMateriasPrimas extends javax.swing.JFrame implements ActionListener {
     private MateriasPrimasbd modeloClientes;
     private String Modo;
+    private String usuarioActual;
     private ArrayList<String> DatosActuales;
 
-    public VentanaAgregarMateriasPrimas(MateriasPrimasbd ventanaClientes, String modo) {
+    public VentanaAgregarMateriasPrimas(MateriasPrimasbd ventanaClientes, String modo, String usuarioActual) {
+        this.usuarioActual = usuarioActual;
         this.Modo = modo;
         this.modeloClientes = ventanaClientes;
         initComponents();
@@ -237,7 +239,7 @@ public class VentanaAgregarMateriasPrimas extends javax.swing.JFrame implements 
                 int cantidad = Integer.parseInt(Cambio4.getText());
                 String unidadmedida = Cambio5.getText();
                 modeloClientes.editarMateriasPrimas(Codigo, Tipo, descripcion, cantidad, unidadmedida);
-                VentanaGestionMateriasprimas va = new VentanaGestionMateriasprimas(modeloClientes);
+                VentanaGestionMateriasprimas va = new VentanaGestionMateriasprimas(modeloClientes, usuarioActual);
                 this.dispose();
                 va.setVisible(true);
             }
@@ -248,13 +250,13 @@ public class VentanaAgregarMateriasPrimas extends javax.swing.JFrame implements 
                 int cantidad = Integer.parseInt(Cambio4.getText());
                 String unidadmedida = Cambio5.getText();
                 modeloClientes.agregarMateriasPrimas(Codigo, Tipo, descripcion, cantidad, unidadmedida);
-                VentanaGestionMateriasprimas va = new VentanaGestionMateriasprimas(modeloClientes);
+                VentanaGestionMateriasprimas va = new VentanaGestionMateriasprimas(modeloClientes, usuarioActual);
                 this.dispose();
                 va.setVisible(true);
             }
         }
         else if (e.getSource() == Boton_cancelar) {
-            VentanaGestionMateriasprimas va = new VentanaGestionMateriasprimas(modeloClientes);
+            VentanaGestionMateriasprimas va = new VentanaGestionMateriasprimas(modeloClientes, usuarioActual);
             this.dispose();
             va.setVisible(true);
         }

@@ -19,8 +19,10 @@ import java.util.ArrayList;
 
 public class VentanaGestionPedidos extends javax.swing.JFrame implements ActionListener {
     private Pedidosbd modeloPedidos;
+    private String usuarioActual;
 
-    public VentanaGestionPedidos(Pedidosbd ventanaClientes) {
+    public VentanaGestionPedidos(Pedidosbd ventanaClientes, String usuarioActual) {
+        this.usuarioActual = usuarioActual;
         this.modeloPedidos = ventanaClientes;
         initComponents();
         this.setSize(675, 675); // NUEVO TAMAÑO
@@ -201,7 +203,7 @@ public class VentanaGestionPedidos extends javax.swing.JFrame implements ActionL
             }
         }
         else if (e.getSource() == Boton_regresar) {
-            VentanaMenu vm = new VentanaMenu();
+            VentanaMenu vm = new VentanaMenu(usuarioActual);
             this.dispose();
             vm.setVisible(true);
         }
@@ -216,14 +218,14 @@ public class VentanaGestionPedidos extends javax.swing.JFrame implements ActionL
                 datos.add(jTable1.getValueAt(fila, col).toString());
             }
             System.out.println(datos);
-            VentanaAgregarPedido va = new VentanaAgregarPedido(modeloPedidos, "Editar");
+            VentanaAgregarPedido va = new VentanaAgregarPedido(modeloPedidos, "Editar", usuarioActual);
             va.setDatosActuales(datos);
             this.dispose();
             va.setVisible(true);
         }
 
         else if (e.getSource() == Boton_nuevo) {
-            VentanaAgregarPedido va = new VentanaAgregarPedido(modeloPedidos, "Nuevo");
+            VentanaAgregarPedido va = new VentanaAgregarPedido(modeloPedidos, "Nuevo", usuarioActual);
             this.dispose();
             va.setVisible(true);
         }

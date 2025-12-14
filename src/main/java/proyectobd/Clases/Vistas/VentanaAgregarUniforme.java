@@ -21,9 +21,11 @@ import java.util.ArrayList;
 public class VentanaAgregarUniforme extends javax.swing.JFrame implements ActionListener {
     private Uniformesbd modeloClientes;
     private ArrayList<String> DatosActuales;
+    private String usuarioActual;
     private String Modo;
 
-    public VentanaAgregarUniforme(Uniformesbd ventanaClientes, String modo) {
+    public VentanaAgregarUniforme(Uniformesbd ventanaClientes, String modo, String usuarioActual) {
+        this.usuarioActual = usuarioActual;
         this.Modo = modo;
         this.modeloClientes = ventanaClientes;
         initComponents();
@@ -257,7 +259,7 @@ public class VentanaAgregarUniforme extends javax.swing.JFrame implements Action
                 String Escudo = Cambio6.getText();
                 int idcolegio = Integer.parseInt(Cambio7.getText());
                 modeloClientes.editarUniforme(codUniforme, tipo, color, tipo_tela, Bordado, Escudo, idcolegio);
-                VentanaGestionUniformes va = new VentanaGestionUniformes(modeloClientes);
+                VentanaGestionUniformes va = new VentanaGestionUniformes(modeloClientes, usuarioActual);
                 this.dispose();
                 va.setVisible(true);
             }
@@ -270,13 +272,13 @@ public class VentanaAgregarUniforme extends javax.swing.JFrame implements Action
                 String Escudo = Cambio6.getText();
                 int idcolegio = Integer.parseInt(Cambio7.getText());
                 modeloClientes.agregarUniforme(codUniforme, tipo, color, tipo_tela, Bordado, Escudo, idcolegio);
-                VentanaGestionUniformes va = new VentanaGestionUniformes(modeloClientes);
+                VentanaGestionUniformes va = new VentanaGestionUniformes(modeloClientes, usuarioActual);
                 this.dispose();
                 va.setVisible(true);
             }
         }
         else if (e.getSource() == Boton_cancelar) {
-            VentanaGestionUniformes va = new VentanaGestionUniformes(modeloClientes);
+            VentanaGestionUniformes va = new VentanaGestionUniformes(modeloClientes, usuarioActual);
             this.dispose();
             va.setVisible(true);
         }

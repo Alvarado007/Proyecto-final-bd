@@ -21,9 +21,11 @@ import java.util.ArrayList;
 public class VentanaAgregarUsuario extends javax.swing.JFrame implements ActionListener {
     private Usuariosbd modeloClientes;
     private String Modo;
+    private String usuarioActual;
     private ArrayList<String> DatosActuales;
 
-    public VentanaAgregarUsuario(Usuariosbd ventanaClientes, String modo) {
+    public VentanaAgregarUsuario(Usuariosbd ventanaClientes, String modo, String usuarioActual) {
+        this.usuarioActual = usuarioActual;
         this.Modo = modo;
         this.modeloClientes = ventanaClientes;
         initComponents();
@@ -199,7 +201,7 @@ public class VentanaAgregarUsuario extends javax.swing.JFrame implements ActionL
                 String contraseña = Cambio2.getText();
                 String cargo = Cambio3.getText();
                 modeloClientes.editarUsuarios(id, contraseña, cargo);
-                VentanaGestionUsuarios va = new VentanaGestionUsuarios (modeloClientes);
+                VentanaGestionUsuarios va = new VentanaGestionUsuarios (modeloClientes, usuarioActual);
                 this.dispose();
                 va.setVisible(true);
             }
@@ -208,13 +210,13 @@ public class VentanaAgregarUsuario extends javax.swing.JFrame implements ActionL
                 String contraseña = Cambio2.getText();
                 String cargo = Cambio3.getText();
                 modeloClientes.agregarUsuarios( contraseña, cargo);
-                VentanaGestionUsuarios va = new VentanaGestionUsuarios (modeloClientes);
+                VentanaGestionUsuarios va = new VentanaGestionUsuarios (modeloClientes, usuarioActual);
                 this.dispose();
                 va.setVisible(true);
             }
         }
         else if (e.getSource() == Boton_cancelar) {
-            VentanaGestionUsuarios va = new VentanaGestionUsuarios (modeloClientes);
+            VentanaGestionUsuarios va = new VentanaGestionUsuarios (modeloClientes, usuarioActual);
             this.dispose();
             va.setVisible(true);
         }

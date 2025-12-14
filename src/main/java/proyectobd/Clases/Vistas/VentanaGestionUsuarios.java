@@ -21,8 +21,9 @@ import java.awt.event.ActionListener;
 
 public class VentanaGestionUsuarios extends javax.swing.JFrame implements ActionListener {
     private Usuariosbd modeloClientes;
-
-    public VentanaGestionUsuarios(Usuariosbd ventanaClientes) {
+    private String usuarioActual;
+    public VentanaGestionUsuarios(Usuariosbd ventanaClientes, String usuarioActual) {
+        this.usuarioActual = usuarioActual;
         this.modeloClientes = ventanaClientes;
         initComponents();
         this.setSize(675, 675); // NUEVO TAMAÑO
@@ -203,7 +204,7 @@ public class VentanaGestionUsuarios extends javax.swing.JFrame implements Action
         }
 
         else if (e.getSource() == Boton_regresar) {
-            VentanaMenu vm = new VentanaMenu();
+            VentanaMenu vm = new VentanaMenu(usuarioActual);
             this.dispose();
             vm.setVisible(true);
         }
@@ -215,14 +216,14 @@ public class VentanaGestionUsuarios extends javax.swing.JFrame implements Action
                 datos.add(jTable1.getValueAt(fila, col).toString());
             }
             System.out.println(datos);
-            VentanaAgregarUsuario va = new VentanaAgregarUsuario(modeloClientes, "Editar");
+            VentanaAgregarUsuario va = new VentanaAgregarUsuario(modeloClientes, "Editar",usuarioActual);
             va.setDatosActuales(datos);
             this.dispose();
             va.setVisible(true);
         }
 
         else if (e.getSource() == Boton_nuevo) {
-            VentanaAgregarUsuario va = new VentanaAgregarUsuario(modeloClientes, "Nuevo");
+            VentanaAgregarUsuario va = new VentanaAgregarUsuario(modeloClientes, "Nuevo",usuarioActual);
             va.ocultarId();
             this.dispose();
             va.setVisible(true);

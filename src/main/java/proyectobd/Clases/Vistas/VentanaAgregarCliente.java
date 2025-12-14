@@ -21,9 +21,11 @@ import java.util.ArrayList;
 public class VentanaAgregarCliente extends javax.swing.JFrame implements ActionListener {
     private Clientesbd modeloClientes;
     private String Modo;
+    private String usuarioActual;
     private ArrayList<String> DatosActuales;
 
-    public VentanaAgregarCliente(Clientesbd ventanaClientes, String modo) {
+    public VentanaAgregarCliente(Clientesbd ventanaClientes, String modo, String usuarioActual) {
+        this.usuarioActual = usuarioActual;
         this.Modo = modo;
         this.modeloClientes = ventanaClientes;
         initComponents();
@@ -195,7 +197,7 @@ public class VentanaAgregarCliente extends javax.swing.JFrame implements ActionL
                 String nombre = Cambio2.getText();
                 String telefono = Cambio3.getText();
                 modeloClientes.editarCliente(dni, nombre, telefono);
-                VentanaGestionClientes va = new VentanaGestionClientes(modeloClientes);
+                VentanaGestionClientes va = new VentanaGestionClientes(modeloClientes, usuarioActual);
                 this.dispose();
                 va.setVisible(true);
             }
@@ -204,13 +206,13 @@ public class VentanaAgregarCliente extends javax.swing.JFrame implements ActionL
                 String nombre = Cambio2.getText();
                 String telefono = Cambio3.getText();
                 modeloClientes.agregarCliente(dni, nombre, telefono);
-                VentanaGestionClientes va = new VentanaGestionClientes(modeloClientes);
+                VentanaGestionClientes va = new VentanaGestionClientes(modeloClientes, usuarioActual);
                 this.dispose();
                 va.setVisible(true);
             }
         }
         else if (e.getSource() == Boton_cancelar) {
-            VentanaGestionClientes va = new VentanaGestionClientes(modeloClientes);
+            VentanaGestionClientes va = new VentanaGestionClientes(modeloClientes,  usuarioActual);
             this.dispose();
             va.setVisible(true);
         }

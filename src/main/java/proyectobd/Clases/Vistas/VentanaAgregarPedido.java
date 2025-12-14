@@ -22,9 +22,11 @@ import java.util.ArrayList;
 public class VentanaAgregarPedido extends javax.swing.JFrame implements ActionListener {
     private Pedidosbd modeloClientes;
     private String Modo;
+    private String usuarioActual;
     private ArrayList<String> DatosActuales;
 
-    public VentanaAgregarPedido(Pedidosbd ventanaClientes, String modo) {
+    public VentanaAgregarPedido(Pedidosbd ventanaClientes, String modo, String usuarioActual) {
+        this.usuarioActual = usuarioActual;
         this.Modo = modo;
         this.modeloClientes = ventanaClientes;
         initComponents();
@@ -249,7 +251,7 @@ public class VentanaAgregarPedido extends javax.swing.JFrame implements ActionLi
                 String anotacion = Cambio5.getText();
                 String dni_cliente = Cambio6.getText();
                 modeloClientes.editarPedido(num_pedido, fecha_encargo, fecha_entrega, abono, anotacion, dni_cliente);
-                VentanaGestionPedidos va = new VentanaGestionPedidos(modeloClientes);
+                VentanaGestionPedidos va = new VentanaGestionPedidos(modeloClientes, usuarioActual);
                 this.dispose();
                 va.setVisible(true);
             }
@@ -261,13 +263,13 @@ public class VentanaAgregarPedido extends javax.swing.JFrame implements ActionLi
                 String anotacion = Cambio5.getText();
                 String dni_cliente = Cambio6.getText();
                 modeloClientes.agregarPedido(num_pedido, fecha_encargo, fecha_entrega, abono, anotacion, dni_cliente);
-                VentanaGestionPedidos va = new VentanaGestionPedidos(modeloClientes);
+                VentanaGestionPedidos va = new VentanaGestionPedidos(modeloClientes, usuarioActual);
                 this.dispose();
                 va.setVisible(true);
             }
         }
         else if (e.getSource() == Boton_cancelar) {
-            VentanaGestionPedidos va = new VentanaGestionPedidos(modeloClientes);
+            VentanaGestionPedidos va = new VentanaGestionPedidos(modeloClientes, usuarioActual);
             this.dispose();
             va.setVisible(true);
         }

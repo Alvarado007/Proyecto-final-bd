@@ -19,8 +19,10 @@ import java.awt.event.ActionListener;
 
 public class VentanaGestionFacturas extends javax.swing.JFrame implements ActionListener {
     private Facturacionbd modeloClientes;
+    private String usuarioActual;
 
-    public VentanaGestionFacturas(Facturacionbd ventanaClientes) {
+    public VentanaGestionFacturas(Facturacionbd ventanaClientes, String usuarioActual) {
+        this.usuarioActual = usuarioActual;
         this.modeloClientes = ventanaClientes;
         initComponents();
         this.setSize(675, 675); // NUEVO TAMAÑO
@@ -201,7 +203,7 @@ public class VentanaGestionFacturas extends javax.swing.JFrame implements Action
         }
 
         else if (e.getSource() == Boton_regresar) {
-            VentanaMenu vm = new VentanaMenu();
+            VentanaMenu vm = new VentanaMenu(usuarioActual);
             this.dispose();
             vm.setVisible(true);
         }
@@ -213,14 +215,14 @@ public class VentanaGestionFacturas extends javax.swing.JFrame implements Action
                 datos.add(jTable1.getValueAt(fila, col).toString());
             }
             System.out.println(datos);
-            VentanaAgregarFactura va = new VentanaAgregarFactura(modeloClientes, "Editar");
+            VentanaAgregarFactura va = new VentanaAgregarFactura(modeloClientes, "Editar",usuarioActual);
             va.setDatosActuales(datos);
             this.dispose();
             va.setVisible(true);
         }
 
         else if (e.getSource() == Boton_nuevo) {
-            VentanaAgregarFactura va = new VentanaAgregarFactura(modeloClientes, "Nuevo");
+            VentanaAgregarFactura va = new VentanaAgregarFactura(modeloClientes, "Nuevo",usuarioActual);
             this.dispose();
             va.setVisible(true);
         }
