@@ -45,7 +45,8 @@ public class VentanaMenu extends javax.swing.JFrame implements ActionListener {
             Materias_primas.setVisible(false);
             Colegios.setVisible(false);
             Uniformes.setVisible(false);
-
+            Facturacion.setVisible(false);
+            Clientes.setVisible(false);
         }
     }
     @SuppressWarnings("unchecked")
@@ -122,7 +123,7 @@ public class VentanaMenu extends javax.swing.JFrame implements ActionListener {
         Reportes.setFont(new java.awt.Font("Segoe UI", 0, 16));
         Reportes.addActionListener(this);
         jPanel1.add(Reportes);
-        Reportes.setBounds(10, 190, 200, 50);
+        Reportes.setBounds(230, 190, 200, 50);
 
         Uniformes.setFont(new java.awt.Font("Segoe UI", 0, 16));
         Uniformes.addActionListener(this);
