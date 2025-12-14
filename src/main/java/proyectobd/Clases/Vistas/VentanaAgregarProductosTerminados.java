@@ -10,21 +10,22 @@ import javax.swing.ImageIcon;
 import javax.swing.ListSelectionModel;
 
 import proyectobd.Clases.Modelos.Clientesbd;
-import proyectobd.Clases.Modelos.Proveedoresbd;
+import proyectobd.Clases.Modelos.ProductosTerminadosbd;
 import proyectobd.Estetica.Botontransparente;
 import proyectobd.Estetica.Campotextotransparente;
 import proyectobd.Estetica.Labeltransparente;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
-public class VentanaAgregarProvedor extends javax.swing.JFrame implements ActionListener {
-    private Proveedoresbd modeloClientes;
+public class VentanaAgregarProductosTerminados extends javax.swing.JFrame implements ActionListener {
+    private ProductosTerminadosbd modeloClientes;
     private String Modo;
     private ArrayList<String> DatosActuales;
 
-    public VentanaAgregarProvedor(Proveedoresbd ventanaClientes, String modo) {
+    public VentanaAgregarProductosTerminados(ProductosTerminadosbd ventanaClientes, String modo) {
         this.Modo = modo;
         this.modeloClientes = ventanaClientes;
         initComponents();
@@ -45,6 +46,7 @@ public class VentanaAgregarProvedor extends javax.swing.JFrame implements Action
         Cambio3.setText(DatosActuales.get(2));
         Cambio4.setText(DatosActuales.get(3));
         Cambio5.setText(DatosActuales.get(4));
+        Cambio6.setText(DatosActuales.get(5));
         }
     }
 
@@ -56,14 +58,17 @@ public class VentanaAgregarProvedor extends javax.swing.JFrame implements Action
         Cambio3 = new Campotextotransparente(1);
         Cambio4 = new Campotextotransparente(1);
         Cambio5 = new Campotextotransparente(1);
+        Cambio6 = new Campotextotransparente(1);
         Boton_guardar = new Botontransparente("Guardar");
         Boton_cancelar = new Botontransparente("Cancelar");
-        Nombre_ventana = new Labeltransparente("Proveedores");
-        Label_cambio1 = new Labeltransparente("nit");
-        Label_cambio2 = new Labeltransparente("nombre");
-        Label_cambio3 = new Labeltransparente("direccion");
-        Label_cambio4 = new Labeltransparente("telefono");
-        Label_cambio5 = new Labeltransparente("nombreContacto");
+        Nombre_ventana = new Labeltransparente("Productos Terminados");
+        Label_cambio1 = new Labeltransparente("Codigo");
+        Label_cambio2 = new Labeltransparente("Descripcion");
+        Label_cambio3 = new Labeltransparente("talla");
+        Label_cambio4 = new Labeltransparente("Sexo");
+        Label_cambio5 = new Labeltransparente("Precio");
+        Label_cambio6 = new Labeltransparente("Num Pedido");
+
         
         jLabel6 = new javax.swing.JLabel();
 
@@ -113,7 +118,10 @@ public class VentanaAgregarProvedor extends javax.swing.JFrame implements Action
         Cambio5.setBounds(340, 330, 190, 50);
         jPanel1.add(Cambio5);
 
-        
+        Cambio6.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        Cambio6.setForeground(Color.BLACK);
+        Cambio6.setBounds(340, 390, 190, 50);
+        jPanel1.add(Cambio6);
 
         
 
@@ -140,7 +148,7 @@ public class VentanaAgregarProvedor extends javax.swing.JFrame implements Action
         Nombre_ventana.setFont(new Font("Segoe UI", Font.BOLD, 26));
         Nombre_ventana.setForeground(Color.BLACK);
         jPanel1.add(Nombre_ventana);
-        Nombre_ventana.setBounds(70, 20, 170, 40);
+        Nombre_ventana.setBounds(70, 20,300, 40);
         Nombre_ventana.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         Label_cambio1.setFont(new Font("Segoe UI", Font.PLAIN, 18));
@@ -173,7 +181,11 @@ public class VentanaAgregarProvedor extends javax.swing.JFrame implements Action
         Label_cambio5.setBounds(140, 330, 190, 50);
         Label_cambio5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-       
+        Label_cambio6.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        Label_cambio6.setForeground(Color.BLACK);
+        jPanel1.add(Label_cambio6);
+        Label_cambio6.setBounds(140, 390, 190, 50);
+        Label_cambio6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         
         
@@ -200,7 +212,7 @@ public class VentanaAgregarProvedor extends javax.swing.JFrame implements Action
     // public static void main(String args[]) {
     //     java.awt.EventQueue.invokeLater(new Runnable() {
     //         public void run() {
-    //             new VentanaAgregarProvedor().setVisible(true);
+    //             new VentanaAgregarProductosTerminados().setVisible(true);
     //         }
     //     });
     // }
@@ -214,7 +226,7 @@ public class VentanaAgregarProvedor extends javax.swing.JFrame implements Action
     private javax.swing.JLabel Label_cambio3;
     private javax.swing.JLabel Label_cambio4;
     private javax.swing.JLabel Label_cambio5;
-    
+    private javax.swing.JLabel Label_cambio6;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField Cambio1;
@@ -222,7 +234,7 @@ public class VentanaAgregarProvedor extends javax.swing.JFrame implements Action
     private javax.swing.JTextField Cambio3;
     private javax.swing.JTextField Cambio4;
     private javax.swing.JTextField Cambio5;
-    
+    private javax.swing.JTextField Cambio6;
     // End of variables declaration
 
 
@@ -231,31 +243,32 @@ public class VentanaAgregarProvedor extends javax.swing.JFrame implements Action
         // TODO Auto-generated method stub
         if (e.getSource() == Boton_guardar) {
             if (Modo == "Editar"){
-                String NIT = Cambio1.getText();
-                String nombre = Cambio2.getText();
-                String direccion = Cambio3.getText();
-                String telefono = Cambio4.getText();
-                String nombreContacto = Cambio5.getText();
-                modeloClientes.editarProveedor(NIT, nombre, direccion, telefono, nombreContacto);
-                VentanaGestionProveedores va = new VentanaGestionProveedores(modeloClientes);
+                int codigo = Integer.parseInt(Cambio1.getText());
+                String descripcion = Cambio2.getText();
+                String talla = Cambio3.getText();
+                String sexo = Cambio4.getText();
+                BigDecimal precio = new BigDecimal(Cambio5.getText());
+                int num_pedido = Integer.parseInt(Cambio6.getText());
+                modeloClientes.editarProductosTerminados(codigo, descripcion, talla, sexo, precio, num_pedido);
+                VentanaGestionProductosTerminados va = new VentanaGestionProductosTerminados(modeloClientes);
                 this.dispose();
                 va.setVisible(true);
             }
             else if (Modo == "Nuevo"){
-                String nit = Cambio1.getText();
-                String nombre = Cambio2.getText();
-                String direccion = Cambio3.getText();
-                String telefono = Cambio4.getText();
-                String nombreContacto = Cambio5.getText();
-                
-                modeloClientes.agregarProveedor(nit, nombre, direccion, telefono, nombreContacto);
-                VentanaGestionProveedores va = new VentanaGestionProveedores(modeloClientes);
+                int codigo = Integer.parseInt(Cambio1.getText());
+                String descripcion = Cambio2.getText();
+                String talla = Cambio3.getText();
+                String sexo = Cambio4.getText();
+                BigDecimal precio = new BigDecimal(Cambio5.getText());
+                int num_pedido = Integer.parseInt(Cambio6.getText());
+                modeloClientes.agregarProductosTerminados(codigo, descripcion, talla, sexo, precio, num_pedido);
+                VentanaGestionProductosTerminados va = new VentanaGestionProductosTerminados(modeloClientes);
                 this.dispose();
                 va.setVisible(true);
             }
         }
         else if (e.getSource() == Boton_cancelar) {
-            VentanaGestionProveedores va = new VentanaGestionProveedores(modeloClientes);
+            VentanaGestionProductosTerminados va = new VentanaGestionProductosTerminados(modeloClientes);
             this.dispose();
             va.setVisible(true);
         }
@@ -264,4 +277,3 @@ public class VentanaAgregarProvedor extends javax.swing.JFrame implements Action
     }
     
 }
-

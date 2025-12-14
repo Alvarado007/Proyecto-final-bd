@@ -9,8 +9,9 @@ import javax.swing.ImageIcon;
 import javax.swing.ListSelectionModel;
 
 import proyectobd.Clases.Modelos.Clientesbd;
-import proyectobd.Clases.Modelos.Colegiosbd;
-import proyectobd.Clases.Modelos.Colegiosbd;
+import proyectobd.Clases.Modelos.Usuariosbd;
+import proyectobd.Clases.Modelos.Usuariosbd;
+import proyectobd.Clases.Modelos.Usuariosbd;
 import proyectobd.Estetica.Botontransparente;
 import proyectobd.Estetica.Campotextotransparente;
 import proyectobd.Estetica.Labeltransparente;
@@ -19,9 +20,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class VentanaGestionUsuarios extends javax.swing.JFrame implements ActionListener {
-    private Colegiosbd modeloClientes;
+    private Usuariosbd modeloClientes;
 
-    public VentanaGestionUsuarios(Colegiosbd ventanaClientes) {
+    public VentanaGestionUsuarios(Usuariosbd ventanaClientes) {
         this.modeloClientes = ventanaClientes;
         initComponents();
         this.setSize(675, 675); // NUEVO TAMAÑO
@@ -31,7 +32,7 @@ public class VentanaGestionUsuarios extends javax.swing.JFrame implements Action
 
     @SuppressWarnings("unchecked")
     private void initComponents() {
-        String[] columnas = {"id","nombre"};
+        String[] columnas = {"id","Contraseña","Cargo"};
         jPanel1 = new javax.swing.JPanel();
         Texto_buscar = new Campotextotransparente(1);
         Boton_buscar = new Botontransparente("Buscar");
@@ -39,7 +40,7 @@ public class VentanaGestionUsuarios extends javax.swing.JFrame implements Action
         Boton_nuevo = new Botontransparente("Nuevo");
         Boton_refrescar = new Botontransparente("Refrescar");
         Boton_regresar = new Botontransparente("Regresar");
-        Nombre_ventana = new Labeltransparente("Colegios");
+        Nombre_ventana = new Labeltransparente("Usuarios");
         jLabel6 = new javax.swing.JLabel();
         modelo = new javax.swing.table.DefaultTableModel(null, columnas){
             @Override
@@ -112,7 +113,7 @@ public class VentanaGestionUsuarios extends javax.swing.JFrame implements Action
         Nombre_ventana.setBounds(70, 20, 120, 40);
         Nombre_ventana.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-        for (Object[] fila : modeloClientes.obtenerColegio()) {
+        for (Object[] fila : modeloClientes.obtenerUsuarios()) {
             modelo.addRow(fila);
         }
 
@@ -186,7 +187,7 @@ public class VentanaGestionUsuarios extends javax.swing.JFrame implements Action
         if (e.getSource() == Boton_buscar) {
             int cliente_buscar = Integer.parseInt(Texto_buscar.getText());
             modelo.setRowCount(0);
-            for (Object[] fila : modeloClientes.BuscarColegio(cliente_buscar)) {
+            for (Object[] fila : modeloClientes.BuscarUsuarios(cliente_buscar)) {
                 modelo.addRow(fila);
             }
         }
@@ -196,7 +197,7 @@ public class VentanaGestionUsuarios extends javax.swing.JFrame implements Action
         // }
         else if (e.getSource() == Boton_refrescar) {
             modelo.setRowCount(0);
-            for (Object[] fila : modeloClientes.obtenerColegio()) {
+            for (Object[] fila : modeloClientes.obtenerUsuarios()) {
                 modelo.addRow(fila);
             }
         }
@@ -214,14 +215,15 @@ public class VentanaGestionUsuarios extends javax.swing.JFrame implements Action
                 datos.add(jTable1.getValueAt(fila, col).toString());
             }
             System.out.println(datos);
-            VentanaAgregarColegio va = new VentanaAgregarColegio(modeloClientes, "Editar");
+            VentanaAgregarUsuario va = new VentanaAgregarUsuario(modeloClientes, "Editar");
             va.setDatosActuales(datos);
             this.dispose();
             va.setVisible(true);
         }
 
         else if (e.getSource() == Boton_nuevo) {
-            VentanaAgregarColegio va = new VentanaAgregarColegio(modeloClientes, "Nuevo");
+            VentanaAgregarUsuario va = new VentanaAgregarUsuario(modeloClientes, "Nuevo");
+            va.ocultarId();
             this.dispose();
             va.setVisible(true);
         }

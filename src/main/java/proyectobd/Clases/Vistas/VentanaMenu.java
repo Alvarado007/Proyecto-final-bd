@@ -13,9 +13,12 @@ import proyectobd.Clases.Modelos.Clientesbd;
 import proyectobd.Clases.Modelos.Colegiosbd;
 import proyectobd.Clases.Modelos.Facturacionbd;
 import proyectobd.Clases.Modelos.Login;
+import proyectobd.Clases.Modelos.MateriasPrimasbd;
 import proyectobd.Clases.Modelos.Pedidosbd;
+import proyectobd.Clases.Modelos.ProductosTerminadosbd;
 import proyectobd.Clases.Modelos.Proveedoresbd;
 import proyectobd.Clases.Modelos.Uniformesbd;
+import proyectobd.Clases.Modelos.Usuariosbd;
 import proyectobd.Estetica.Botontransparente;
 import proyectobd.Estetica.Labeltransparente;
 
@@ -221,12 +224,12 @@ public class VentanaMenu extends javax.swing.JFrame implements ActionListener {
             va.setVisible(true);
         }
 
-        // else if (e.getSource() == Materias_primas) {
-        //     Materias_primasbd modeloClientes = new Materias_primasbd();
-        //     VentanaGestionMaterias_primas va = new VentanaGestionMaterias_primas(modeloClientes);
-        //     this.dispose();
-        //     va.setVisible(true);
-        // }
+        else if (e.getSource() == Materias_primas) {
+            MateriasPrimasbd modeloClientes = new MateriasPrimasbd();
+            VentanaGestionMateriasprimas va = new VentanaGestionMateriasprimas(modeloClientes);
+            this.dispose();
+            va.setVisible(true);
+        }
 
         else if (e.getSource() == Uniformes) {
             Uniformesbd modeloClientes = new Uniformesbd();
@@ -238,6 +241,20 @@ public class VentanaMenu extends javax.swing.JFrame implements ActionListener {
         else if (e.getSource() == Proveedores) {
             Proveedoresbd modeloClientes = new Proveedoresbd();
             VentanaGestionProveedores va = new VentanaGestionProveedores(modeloClientes);
+            this.dispose();
+            va.setVisible(true);
+        }
+
+        else if (e.getSource() == Productos_terminados) {
+            ProductosTerminadosbd modeloClientes = new ProductosTerminadosbd();
+            VentanaGestionProductosTerminados va = new VentanaGestionProductosTerminados(modeloClientes);
+            this.dispose();
+            va.setVisible(true);
+        }
+
+        else if (e.getSource() == Usuarios) {
+            Usuariosbd modeloClientes = new Usuariosbd();
+            VentanaGestionUsuarios va = new VentanaGestionUsuarios(modeloClientes);
             this.dispose();
             va.setVisible(true);
         }

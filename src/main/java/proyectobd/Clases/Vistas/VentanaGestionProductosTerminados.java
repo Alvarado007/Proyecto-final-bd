@@ -9,8 +9,8 @@ import javax.swing.ImageIcon;
 import javax.swing.ListSelectionModel;
 
 import proyectobd.Clases.Modelos.Clientesbd;
-import proyectobd.Clases.Modelos.Colegiosbd;
-import proyectobd.Clases.Modelos.Colegiosbd;
+import proyectobd.Clases.Modelos.ProductosTerminadosbd;
+import proyectobd.Clases.Modelos.ProductosTerminadosbd;
 import proyectobd.Estetica.Botontransparente;
 import proyectobd.Estetica.Campotextotransparente;
 import proyectobd.Estetica.Labeltransparente;
@@ -19,9 +19,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class VentanaGestionProductosTerminados extends javax.swing.JFrame implements ActionListener {
-    private Colegiosbd modeloClientes;
+    private ProductosTerminadosbd modeloClientes;
 
-    public VentanaGestionProductosTerminados(Colegiosbd ventanaClientes) {
+    public VentanaGestionProductosTerminados(ProductosTerminadosbd ventanaClientes) {
         this.modeloClientes = ventanaClientes;
         initComponents();
         this.setSize(675, 675); // NUEVO TAMAÑO
@@ -31,7 +31,7 @@ public class VentanaGestionProductosTerminados extends javax.swing.JFrame implem
 
     @SuppressWarnings("unchecked")
     private void initComponents() {
-        String[] columnas = {"id","nombre"};
+        String[] columnas = {"Codigo","Descripcion","Talla","Sexo","Precio","numpedido"};
         jPanel1 = new javax.swing.JPanel();
         Texto_buscar = new Campotextotransparente(1);
         Boton_buscar = new Botontransparente("Buscar");
@@ -39,7 +39,7 @@ public class VentanaGestionProductosTerminados extends javax.swing.JFrame implem
         Boton_nuevo = new Botontransparente("Nuevo");
         Boton_refrescar = new Botontransparente("Refrescar");
         Boton_regresar = new Botontransparente("Regresar");
-        Nombre_ventana = new Labeltransparente("Colegios");
+        Nombre_ventana = new Labeltransparente("Productos Terminados");
         jLabel6 = new javax.swing.JLabel();
         modelo = new javax.swing.table.DefaultTableModel(null, columnas){
             @Override
@@ -112,7 +112,7 @@ public class VentanaGestionProductosTerminados extends javax.swing.JFrame implem
         Nombre_ventana.setBounds(70, 20, 120, 40);
         Nombre_ventana.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-        for (Object[] fila : modeloClientes.obtenerColegio()) {
+        for (Object[] fila : modeloClientes.obtenerProductosTerminados()) {
             modelo.addRow(fila);
         }
 
@@ -186,7 +186,7 @@ public class VentanaGestionProductosTerminados extends javax.swing.JFrame implem
         if (e.getSource() == Boton_buscar) {
             int cliente_buscar = Integer.parseInt(Texto_buscar.getText());
             modelo.setRowCount(0);
-            for (Object[] fila : modeloClientes.BuscarColegio(cliente_buscar)) {
+            for (Object[] fila : modeloClientes.BuscarProductosTerminados(cliente_buscar)) {
                 modelo.addRow(fila);
             }
         }
@@ -196,7 +196,7 @@ public class VentanaGestionProductosTerminados extends javax.swing.JFrame implem
         // }
         else if (e.getSource() == Boton_refrescar) {
             modelo.setRowCount(0);
-            for (Object[] fila : modeloClientes.obtenerColegio()) {
+            for (Object[] fila : modeloClientes.obtenerProductosTerminados()) {
                 modelo.addRow(fila);
             }
         }
@@ -214,14 +214,14 @@ public class VentanaGestionProductosTerminados extends javax.swing.JFrame implem
                 datos.add(jTable1.getValueAt(fila, col).toString());
             }
             System.out.println(datos);
-            VentanaAgregarColegio va = new VentanaAgregarColegio(modeloClientes, "Editar");
+            VentanaAgregarProductosTerminados va = new VentanaAgregarProductosTerminados(modeloClientes, "Editar");
             va.setDatosActuales(datos);
             this.dispose();
             va.setVisible(true);
         }
 
         else if (e.getSource() == Boton_nuevo) {
-            VentanaAgregarColegio va = new VentanaAgregarColegio(modeloClientes, "Nuevo");
+            VentanaAgregarProductosTerminados va = new VentanaAgregarProductosTerminados(modeloClientes, "Nuevo");
             this.dispose();
             va.setVisible(true);
         }

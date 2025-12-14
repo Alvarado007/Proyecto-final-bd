@@ -9,8 +9,8 @@ import javax.swing.ImageIcon;
 import javax.swing.ListSelectionModel;
 
 import proyectobd.Clases.Modelos.Clientesbd;
-import proyectobd.Clases.Modelos.Colegiosbd;
-import proyectobd.Clases.Modelos.Colegiosbd;
+import proyectobd.Clases.Modelos.MateriasPrimasbd;
+import proyectobd.Clases.Modelos.MateriasPrimasbd;
 import proyectobd.Estetica.Botontransparente;
 import proyectobd.Estetica.Campotextotransparente;
 import proyectobd.Estetica.Labeltransparente;
@@ -19,9 +19,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class VentanaGestionMateriasprimas extends javax.swing.JFrame implements ActionListener {
-    private Colegiosbd modeloClientes;
+    private MateriasPrimasbd modeloClientes;
 
-    public VentanaGestionMateriasprimas(Colegiosbd ventanaClientes) {
+    public VentanaGestionMateriasprimas(MateriasPrimasbd ventanaClientes) {
         this.modeloClientes = ventanaClientes;
         initComponents();
         this.setSize(675, 675); // NUEVO TAMAÑO
@@ -31,7 +31,7 @@ public class VentanaGestionMateriasprimas extends javax.swing.JFrame implements 
 
     @SuppressWarnings("unchecked")
     private void initComponents() {
-        String[] columnas = {"id","nombre"};
+        String[] columnas = {"codigo","tipo","descripcion","cantidad","unidad_medida"};
         jPanel1 = new javax.swing.JPanel();
         Texto_buscar = new Campotextotransparente(1);
         Boton_buscar = new Botontransparente("Buscar");
@@ -39,7 +39,7 @@ public class VentanaGestionMateriasprimas extends javax.swing.JFrame implements 
         Boton_nuevo = new Botontransparente("Nuevo");
         Boton_refrescar = new Botontransparente("Refrescar");
         Boton_regresar = new Botontransparente("Regresar");
-        Nombre_ventana = new Labeltransparente("Colegios");
+        Nombre_ventana = new Labeltransparente("Materias Primas");
         jLabel6 = new javax.swing.JLabel();
         modelo = new javax.swing.table.DefaultTableModel(null, columnas){
             @Override
@@ -112,7 +112,7 @@ public class VentanaGestionMateriasprimas extends javax.swing.JFrame implements 
         Nombre_ventana.setBounds(70, 20, 120, 40);
         Nombre_ventana.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-        for (Object[] fila : modeloClientes.obtenerColegio()) {
+        for (Object[] fila : modeloClientes.obtenerMateriasPrimas()) {
             modelo.addRow(fila);
         }
 
@@ -186,7 +186,7 @@ public class VentanaGestionMateriasprimas extends javax.swing.JFrame implements 
         if (e.getSource() == Boton_buscar) {
             int cliente_buscar = Integer.parseInt(Texto_buscar.getText());
             modelo.setRowCount(0);
-            for (Object[] fila : modeloClientes.BuscarColegio(cliente_buscar)) {
+            for (Object[] fila : modeloClientes.BuscarMateriasPrimas(cliente_buscar)) {
                 modelo.addRow(fila);
             }
         }
@@ -196,7 +196,7 @@ public class VentanaGestionMateriasprimas extends javax.swing.JFrame implements 
         // }
         else if (e.getSource() == Boton_refrescar) {
             modelo.setRowCount(0);
-            for (Object[] fila : modeloClientes.obtenerColegio()) {
+            for (Object[] fila : modeloClientes.obtenerMateriasPrimas()) {
                 modelo.addRow(fila);
             }
         }
@@ -214,14 +214,14 @@ public class VentanaGestionMateriasprimas extends javax.swing.JFrame implements 
                 datos.add(jTable1.getValueAt(fila, col).toString());
             }
             System.out.println(datos);
-            VentanaAgregarColegio va = new VentanaAgregarColegio(modeloClientes, "Editar");
+            VentanaAgregarMateriasPrimas va = new VentanaAgregarMateriasPrimas(modeloClientes, "Editar");
             va.setDatosActuales(datos);
             this.dispose();
             va.setVisible(true);
         }
 
         else if (e.getSource() == Boton_nuevo) {
-            VentanaAgregarColegio va = new VentanaAgregarColegio(modeloClientes, "Nuevo");
+            VentanaAgregarMateriasPrimas va = new VentanaAgregarMateriasPrimas(modeloClientes, "Nuevo");
             this.dispose();
             va.setVisible(true);
         }
