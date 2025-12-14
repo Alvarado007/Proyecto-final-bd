@@ -9,7 +9,7 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.ListSelectionModel;
 
-import proyectobd.Clases.Modelos.Usuariosbd;
+import proyectobd.Clases.Modelos.Clientesbd;
 import proyectobd.Estetica.Botontransparente;
 import proyectobd.Estetica.Campotextotransparente;
 import proyectobd.Estetica.Labeltransparente;
@@ -18,13 +18,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class VentanaAgregarUsuario extends javax.swing.JFrame implements ActionListener {
-    private Usuariosbd modeloClientes;
+public class VentanaAgregarCliente extends javax.swing.JFrame implements ActionListener {
+    private Clientesbd modeloClientes;
     private String Modo;
     private String usuarioActual;
     private ArrayList<String> DatosActuales;
 
-    public VentanaAgregarUsuario(Usuariosbd ventanaClientes, String modo, String usuarioActual) {
+    public VentanaAgregarCliente(Clientesbd ventanaClientes, String modo, String usuarioActual) {
         this.usuarioActual = usuarioActual;
         this.Modo = modo;
         this.modeloClientes = ventanaClientes;
@@ -47,10 +47,6 @@ public class VentanaAgregarUsuario extends javax.swing.JFrame implements ActionL
         }
     }
 
-    public void ocultarId() {
-        Cambio1.setEditable(false);
-    }
-
     @SuppressWarnings("unchecked")
     private void initComponents() {
         jPanel1 = new javax.swing.JPanel();
@@ -60,9 +56,9 @@ public class VentanaAgregarUsuario extends javax.swing.JFrame implements ActionL
         Boton_guardar = new Botontransparente("Guardar");
         Boton_cancelar = new Botontransparente("Cancelar");
         Nombre_ventana = new Labeltransparente("Clientes");
-        Label_cambio1 = new Labeltransparente("Id");
-        Label_cambio2 = new Labeltransparente("Contraseña");
-        Label_cambio3 = new Labeltransparente("Cargo");
+        Label_cambio1 = new Labeltransparente("Dni");
+        Label_cambio2 = new Labeltransparente("Nombre");
+        Label_cambio3 = new Labeltransparente("Telefono");
         
         jLabel6 = new javax.swing.JLabel();
 
@@ -197,26 +193,26 @@ public class VentanaAgregarUsuario extends javax.swing.JFrame implements ActionL
         // TODO Auto-generated method stub
         if (e.getSource() == Boton_guardar) {
             if (Modo == "Editar"){
-                int id = Integer.parseInt(Cambio1.getText());
-                String contraseña = Cambio2.getText();
-                String cargo = Cambio3.getText();
-                modeloClientes.editarUsuarios(id, contraseña, cargo);
-                VentanaGestionUsuarios va = new VentanaGestionUsuarios (modeloClientes, usuarioActual);
+                String dni = Cambio1.getText();
+                String nombre = Cambio2.getText();
+                String telefono = Cambio3.getText();
+                modeloClientes.editarCliente(dni, nombre, telefono);
+                VentanaGestionClientes va = new VentanaGestionClientes(modeloClientes, usuarioActual);
                 this.dispose();
                 va.setVisible(true);
             }
             else if (Modo == "Nuevo"){
-                // int id = Integer.parseInt(Cambio1.getText());
-                String contraseña = Cambio2.getText();
-                String cargo = Cambio3.getText();
-                modeloClientes.agregarUsuarios( contraseña, cargo);
-                VentanaGestionUsuarios va = new VentanaGestionUsuarios (modeloClientes, usuarioActual);
+                String dni = Cambio1.getText();
+                String nombre = Cambio2.getText();
+                String telefono = Cambio3.getText();
+                modeloClientes.agregarCliente(dni, nombre, telefono);
+                VentanaGestionClientes va = new VentanaGestionClientes(modeloClientes, usuarioActual);
                 this.dispose();
                 va.setVisible(true);
             }
         }
         else if (e.getSource() == Boton_cancelar) {
-            VentanaGestionUsuarios va = new VentanaGestionUsuarios (modeloClientes, usuarioActual);
+            VentanaGestionClientes va = new VentanaGestionClientes(modeloClientes,  usuarioActual);
             this.dispose();
             va.setVisible(true);
         }

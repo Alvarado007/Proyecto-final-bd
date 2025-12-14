@@ -9,7 +9,7 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.ListSelectionModel;
 
-import proyectobd.Clases.Modelos.Usuariosbd;
+import proyectobd.Clases.Modelos.Uniformesbd;
 import proyectobd.Estetica.Botontransparente;
 import proyectobd.Estetica.Campotextotransparente;
 import proyectobd.Estetica.Labeltransparente;
@@ -18,13 +18,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class VentanaAgregarUsuario extends javax.swing.JFrame implements ActionListener {
-    private Usuariosbd modeloClientes;
-    private String Modo;
-    private String usuarioActual;
+public class VentanaAgregarUniforme extends javax.swing.JFrame implements ActionListener {
+    private Uniformesbd modeloClientes;
     private ArrayList<String> DatosActuales;
+    private String usuarioActual;
+    private String Modo;
 
-    public VentanaAgregarUsuario(Usuariosbd ventanaClientes, String modo, String usuarioActual) {
+    public VentanaAgregarUniforme(Uniformesbd ventanaClientes, String modo, String usuarioActual) {
         this.usuarioActual = usuarioActual;
         this.Modo = modo;
         this.modeloClientes = ventanaClientes;
@@ -33,7 +33,6 @@ public class VentanaAgregarUsuario extends javax.swing.JFrame implements ActionL
         this.setResizable(false); // Igual que el login
         this.setLocationRelativeTo(null); // Centrar ventana
     }
-
     public void setDatosActuales(ArrayList<String> datosActuales) {
         DatosActuales = datosActuales;
         ModoEditar();
@@ -44,26 +43,32 @@ public class VentanaAgregarUsuario extends javax.swing.JFrame implements ActionL
         Cambio1.setText(DatosActuales.get(0));
         Cambio2.setText(DatosActuales.get(1));
         Cambio3.setText(DatosActuales.get(2));
+        Cambio4.setText(DatosActuales.get(3));
+        Cambio5.setText(DatosActuales.get(4));
+        Cambio6.setText(DatosActuales.get(5));
+        Cambio7.setText(DatosActuales.get(6));
         }
     }
-
-    public void ocultarId() {
-        Cambio1.setEditable(false);
-    }
-
     @SuppressWarnings("unchecked")
     private void initComponents() {
         jPanel1 = new javax.swing.JPanel();
         Cambio1 = new Campotextotransparente(1);
         Cambio2 = new Campotextotransparente(1);
         Cambio3 = new Campotextotransparente(1);
+        Cambio4 = new Campotextotransparente(1);
+        Cambio5 = new Campotextotransparente(1);
+        Cambio6 = new Campotextotransparente(1);
+        Cambio7 = new Campotextotransparente(1);
         Boton_guardar = new Botontransparente("Guardar");
         Boton_cancelar = new Botontransparente("Cancelar");
-        Nombre_ventana = new Labeltransparente("Clientes");
-        Label_cambio1 = new Labeltransparente("Id");
-        Label_cambio2 = new Labeltransparente("Contraseña");
-        Label_cambio3 = new Labeltransparente("Cargo");
-        
+        Nombre_ventana = new Labeltransparente("Uniformes");
+        Label_cambio1 = new Labeltransparente("Cod Uniforme");
+        Label_cambio2 = new Labeltransparente("Tipo");
+        Label_cambio3 = new Labeltransparente("color");
+        Label_cambio4 = new Labeltransparente("Tela");
+        Label_cambio5 = new Labeltransparente("Bordado");
+        Label_cambio6 = new Labeltransparente("Escudo");
+        Label_cambio7 = new Labeltransparente("Id Colegio");
         jLabel6 = new javax.swing.JLabel();
 
 
@@ -102,7 +107,25 @@ public class VentanaAgregarUsuario extends javax.swing.JFrame implements ActionL
         Cambio3.setBounds(340, 210, 190, 50);
         jPanel1.add(Cambio3);
 
-        
+        Cambio4.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        Cambio4.setForeground(Color.BLACK);
+        Cambio4.setBounds(340, 270, 190, 50);
+        jPanel1.add(Cambio4);
+
+        Cambio5.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        Cambio5.setForeground(Color.BLACK);
+        Cambio5.setBounds(340, 330, 190, 50);
+        jPanel1.add(Cambio5);
+
+        Cambio6.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        Cambio6.setForeground(Color.BLACK);
+        Cambio6.setBounds(340, 390, 190, 50);
+        jPanel1.add(Cambio6);
+
+        Cambio7.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        Cambio7.setForeground(Color.BLACK);
+        Cambio7.setBounds(340, 450, 190, 50);
+        jPanel1.add(Cambio7);
 
 
         Boton_guardar.setFont(new Font("Segoe UI", Font.PLAIN, 16));
@@ -148,13 +171,37 @@ public class VentanaAgregarUsuario extends javax.swing.JFrame implements ActionL
         Label_cambio3.setBounds(140, 210, 190, 50);
         Label_cambio3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
+        Label_cambio4.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        Label_cambio4.setForeground(Color.BLACK);
+        jPanel1.add(Label_cambio4);
+        Label_cambio4.setBounds(140, 270, 190, 50);
+        Label_cambio4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        Label_cambio5.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        Label_cambio5.setForeground(Color.BLACK);
+        jPanel1.add(Label_cambio5);
+        Label_cambio5.setBounds(140, 330, 190, 50);
+        Label_cambio5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        Label_cambio6.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        Label_cambio6.setForeground(Color.BLACK);
+        jPanel1.add(Label_cambio6);
+        Label_cambio6.setBounds(140, 390, 190, 50);
+        Label_cambio6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        Label_cambio7.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        Label_cambio7.setForeground(Color.BLACK);
+        jPanel1.add(Label_cambio7);
+        Label_cambio7.setBounds(140, 450, 190, 50);
+        Label_cambio7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
         
         
         jLabel6.setMaximumSize(new java.awt.Dimension(675, 675));
         jLabel6.setMinimumSize(new java.awt.Dimension(675, 675));
         jPanel1.add(jLabel6);
         jLabel6.setBounds(0, 0, 675, 675);
-        jLabel6.setIcon(new ImageIcon(getClass().getResource("/proyectobd/Imagenes/Fondo5.png")));
+        jLabel6.setIcon(new ImageIcon(getClass().getResource("/proyectobd/Imagenes/Fondo4.png")));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -173,7 +220,7 @@ public class VentanaAgregarUsuario extends javax.swing.JFrame implements ActionL
     // public static void main(String args[]) {
     //     java.awt.EventQueue.invokeLater(new Runnable() {
     //         public void run() {
-    //             new VentanaAgregarUsuario().setVisible(true);
+    //             new VentanaAgregarUniforme().setVisible(true);
     //         }
     //     });
     // }
@@ -185,38 +232,53 @@ public class VentanaAgregarUsuario extends javax.swing.JFrame implements ActionL
     private javax.swing.JLabel Label_cambio1;
     private javax.swing.JLabel Label_cambio2;
     private javax.swing.JLabel Label_cambio3;
+    private javax.swing.JLabel Label_cambio4;
+    private javax.swing.JLabel Label_cambio5;
+    private javax.swing.JLabel Label_cambio6;
+    private javax.swing.JLabel Label_cambio7;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField Cambio1;
     private javax.swing.JTextField Cambio2;
     private javax.swing.JTextField Cambio3;
-
+    private javax.swing.JTextField Cambio4;
+    private javax.swing.JTextField Cambio5;
+    private javax.swing.JTextField Cambio6;
+    private javax.swing.JTextField Cambio7;
 
     @Override
     public void actionPerformed(ActionEvent e) {
         // TODO Auto-generated method stub
         if (e.getSource() == Boton_guardar) {
             if (Modo == "Editar"){
-                int id = Integer.parseInt(Cambio1.getText());
-                String contraseña = Cambio2.getText();
-                String cargo = Cambio3.getText();
-                modeloClientes.editarUsuarios(id, contraseña, cargo);
-                VentanaGestionUsuarios va = new VentanaGestionUsuarios (modeloClientes, usuarioActual);
+                int codUniforme = Integer.parseInt(Cambio1.getText());
+                String tipo = Cambio2.getText();
+                String color = Cambio3.getText();
+                String tipo_tela = Cambio4.getText();
+                String Bordado = Cambio5.getText();
+                String Escudo = Cambio6.getText();
+                int idcolegio = Integer.parseInt(Cambio7.getText());
+                modeloClientes.editarUniforme(codUniforme, tipo, color, tipo_tela, Bordado, Escudo, idcolegio);
+                VentanaGestionUniformes va = new VentanaGestionUniformes(modeloClientes, usuarioActual);
                 this.dispose();
                 va.setVisible(true);
             }
             else if (Modo == "Nuevo"){
-                // int id = Integer.parseInt(Cambio1.getText());
-                String contraseña = Cambio2.getText();
-                String cargo = Cambio3.getText();
-                modeloClientes.agregarUsuarios( contraseña, cargo);
-                VentanaGestionUsuarios va = new VentanaGestionUsuarios (modeloClientes, usuarioActual);
+                int codUniforme = Integer.parseInt(Cambio1.getText());
+                String tipo = Cambio2.getText();
+                String color = Cambio3.getText();
+                String tipo_tela = Cambio4.getText();
+                String Bordado = Cambio5.getText();
+                String Escudo = Cambio6.getText();
+                int idcolegio = Integer.parseInt(Cambio7.getText());
+                modeloClientes.agregarUniforme(codUniforme, tipo, color, tipo_tela, Bordado, Escudo, idcolegio);
+                VentanaGestionUniformes va = new VentanaGestionUniformes(modeloClientes, usuarioActual);
                 this.dispose();
                 va.setVisible(true);
             }
         }
         else if (e.getSource() == Boton_cancelar) {
-            VentanaGestionUsuarios va = new VentanaGestionUsuarios (modeloClientes, usuarioActual);
+            VentanaGestionUniformes va = new VentanaGestionUniformes(modeloClientes, usuarioActual);
             this.dispose();
             va.setVisible(true);
         }

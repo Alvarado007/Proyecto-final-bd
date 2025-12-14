@@ -9,19 +9,20 @@ import javax.swing.ImageIcon;
 import javax.swing.ListSelectionModel;
 
 import proyectobd.Clases.Modelos.Clientesbd;
+import proyectobd.Clases.Modelos.Usuariosbd;
+import proyectobd.Clases.Modelos.Usuariosbd;
+import proyectobd.Clases.Modelos.Usuariosbd;
 import proyectobd.Estetica.Botontransparente;
 import proyectobd.Estetica.Campotextotransparente;
 import proyectobd.Estetica.Labeltransparente;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
-public class VentanaGestionClientes extends javax.swing.JFrame implements ActionListener {
-    private Clientesbd modeloClientes;
+public class VentanaGestionUsuarios extends javax.swing.JFrame implements ActionListener {
+    private Usuariosbd modeloClientes;
     private String usuarioActual;
-
-    public VentanaGestionClientes(Clientesbd ventanaClientes, String usuarioActual) {
+    public VentanaGestionUsuarios(Usuariosbd ventanaClientes, String usuarioActual) {
         this.usuarioActual = usuarioActual;
         this.modeloClientes = ventanaClientes;
         initComponents();
@@ -32,7 +33,7 @@ public class VentanaGestionClientes extends javax.swing.JFrame implements Action
 
     @SuppressWarnings("unchecked")
     private void initComponents() {
-        String[] columnas = {"Dni", "Nombre", "Telefono"};
+        String[] columnas = {"id","Contraseña","Cargo"};
         jPanel1 = new javax.swing.JPanel();
         Texto_buscar = new Campotextotransparente(1);
         Boton_buscar = new Botontransparente("Buscar");
@@ -41,7 +42,7 @@ public class VentanaGestionClientes extends javax.swing.JFrame implements Action
         Boton_refrescar = new Botontransparente("Refrescar");
         Boton_regresar = new Botontransparente("Regresar");
         Boton_eliminar = new Botontransparente("Eliminar");
-        Nombre_ventana = new Labeltransparente("Clientes");
+        Nombre_ventana = new Labeltransparente("Usuarios");
         jLabel6 = new javax.swing.JLabel();
         modelo = new javax.swing.table.DefaultTableModel(null, columnas){
             @Override
@@ -167,7 +168,7 @@ public class VentanaGestionClientes extends javax.swing.JFrame implements Action
     // public static void main(String args[]) {
     //     java.awt.EventQueue.invokeLater(new Runnable() {
     //         public void run() {
-    //             new VentanaGestionClientes().setVisible(true);
+    //             new VentanaGestionUsuarios().setVisible(true);
     //         }
     //     });
     // }
@@ -192,9 +193,9 @@ public class VentanaGestionClientes extends javax.swing.JFrame implements Action
     public void actionPerformed(ActionEvent e) {
         // TODO Auto-generated method stub
         if (e.getSource() == Boton_buscar) {
-            String cliente_buscar = Texto_buscar.getText();
+            int cliente_buscar = Integer.parseInt(Texto_buscar.getText());
             modelo.setRowCount(0);
-            for (Object[] fila : modeloClientes.BuscarCliente(cliente_buscar)) {
+            for (Object[] fila : modeloClientes.BuscarUsuarios(cliente_buscar)) {
                 modelo.addRow(fila);
             }
         }
@@ -217,22 +218,20 @@ public class VentanaGestionClientes extends javax.swing.JFrame implements Action
 
         else if (e.getSource() == Boton_editar) {
             int fila = jTable1.getSelectedRow();
-            if (fila == -1) return;
-
-            ArrayList<String> datos = new ArrayList<>();
-
+            java.util.ArrayList<String> datos = new java.util.ArrayList<String>();
             for (int col = 0; col < jTable1.getColumnCount(); col++) {
                 datos.add(jTable1.getValueAt(fila, col).toString());
             }
             System.out.println(datos);
-            VentanaAgregarCliente va = new VentanaAgregarCliente(modeloClientes, "Editar", usuarioActual);
+            VentanaAgregarUsuario va = new VentanaAgregarUsuario(modeloClientes, "Editar",usuarioActual);
             va.setDatosActuales(datos);
             this.dispose();
             va.setVisible(true);
         }
 
         else if (e.getSource() == Boton_nuevo) {
-            VentanaAgregarCliente va = new VentanaAgregarCliente(modeloClientes, "Nuevo", usuarioActual);
+            VentanaAgregarUsuario va = new VentanaAgregarUsuario(modeloClientes, "Nuevo",usuarioActual);
+            va.ocultarId();
             this.dispose();
             va.setVisible(true);
         }
@@ -240,16 +239,15 @@ public class VentanaGestionClientes extends javax.swing.JFrame implements Action
         else if (e.getSource() == Boton_eliminar) {
             int fila = jTable1.getSelectedRow();
             if (fila == -1) return;
-
-            String dni_cliente = jTable1.getValueAt(fila, 0).toString();
-            modeloClientes.eliminarCliente(dni_cliente);
-
+            int id_pedido = Integer.parseInt(jTable1.getValueAt(fila, 0).toString());
+            modeloClientes.eliminarUsuarios(id_pedido);
             modelo.setRowCount(0);
-            for (Object[] fila2 : modeloClientes.obtenerUsuarios()) {
-                modelo.addRow(fila2);
+            for (Object[] fila1 : modeloClientes.obtenerUsuarios()) {
+                modelo.addRow(fila1);
             }
         }
-        
     }
-    
+        
 }
+    
+

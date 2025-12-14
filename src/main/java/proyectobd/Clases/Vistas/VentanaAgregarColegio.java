@@ -9,7 +9,8 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.ListSelectionModel;
 
-import proyectobd.Clases.Modelos.Usuariosbd;
+import proyectobd.Clases.Modelos.Colegiosbd;
+import proyectobd.Clases.Modelos.Colegiosbd;
 import proyectobd.Estetica.Botontransparente;
 import proyectobd.Estetica.Campotextotransparente;
 import proyectobd.Estetica.Labeltransparente;
@@ -18,13 +19,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class VentanaAgregarUsuario extends javax.swing.JFrame implements ActionListener {
-    private Usuariosbd modeloClientes;
+public class VentanaAgregarColegio extends javax.swing.JFrame implements ActionListener {
+    private Colegiosbd modeloClientes;
     private String Modo;
     private String usuarioActual;
     private ArrayList<String> DatosActuales;
 
-    public VentanaAgregarUsuario(Usuariosbd ventanaClientes, String modo, String usuarioActual) {
+    public VentanaAgregarColegio(Colegiosbd ventanaClientes, String modo, String usuarioActual) {
         this.usuarioActual = usuarioActual;
         this.Modo = modo;
         this.modeloClientes = ventanaClientes;
@@ -43,12 +44,7 @@ public class VentanaAgregarUsuario extends javax.swing.JFrame implements ActionL
         if (Modo == "Editar"){
         Cambio1.setText(DatosActuales.get(0));
         Cambio2.setText(DatosActuales.get(1));
-        Cambio3.setText(DatosActuales.get(2));
         }
-    }
-
-    public void ocultarId() {
-        Cambio1.setEditable(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -56,13 +52,11 @@ public class VentanaAgregarUsuario extends javax.swing.JFrame implements ActionL
         jPanel1 = new javax.swing.JPanel();
         Cambio1 = new Campotextotransparente(1);
         Cambio2 = new Campotextotransparente(1);
-        Cambio3 = new Campotextotransparente(1);
         Boton_guardar = new Botontransparente("Guardar");
         Boton_cancelar = new Botontransparente("Cancelar");
-        Nombre_ventana = new Labeltransparente("Clientes");
-        Label_cambio1 = new Labeltransparente("Id");
-        Label_cambio2 = new Labeltransparente("Contraseña");
-        Label_cambio3 = new Labeltransparente("Cargo");
+        Nombre_ventana = new Labeltransparente("Colegios");
+        Label_cambio1 = new Labeltransparente("ID Colegio");
+        Label_cambio2 = new Labeltransparente("Nombre");
         
         jLabel6 = new javax.swing.JLabel();
 
@@ -97,10 +91,6 @@ public class VentanaAgregarUsuario extends javax.swing.JFrame implements ActionL
         Cambio2.setBounds(340, 150, 190, 50);
         jPanel1.add(Cambio2);
 
-        Cambio3.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-        Cambio3.setForeground(Color.BLACK);
-        Cambio3.setBounds(340, 210, 190, 50);
-        jPanel1.add(Cambio3);
 
         
 
@@ -142,12 +132,6 @@ public class VentanaAgregarUsuario extends javax.swing.JFrame implements ActionL
         Label_cambio2.setBounds(140, 150, 190, 50);
         Label_cambio2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-        Label_cambio3.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-        Label_cambio3.setForeground(Color.BLACK);
-        jPanel1.add(Label_cambio3);
-        Label_cambio3.setBounds(140, 210, 190, 50);
-        Label_cambio3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-
         
         
         jLabel6.setMaximumSize(new java.awt.Dimension(675, 675));
@@ -184,12 +168,11 @@ public class VentanaAgregarUsuario extends javax.swing.JFrame implements ActionL
     private javax.swing.JLabel Nombre_ventana;
     private javax.swing.JLabel Label_cambio1;
     private javax.swing.JLabel Label_cambio2;
-    private javax.swing.JLabel Label_cambio3;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField Cambio1;
     private javax.swing.JTextField Cambio2;
-    private javax.swing.JTextField Cambio3;
+    
 
 
     @Override
@@ -197,26 +180,24 @@ public class VentanaAgregarUsuario extends javax.swing.JFrame implements ActionL
         // TODO Auto-generated method stub
         if (e.getSource() == Boton_guardar) {
             if (Modo == "Editar"){
-                int id = Integer.parseInt(Cambio1.getText());
-                String contraseña = Cambio2.getText();
-                String cargo = Cambio3.getText();
-                modeloClientes.editarUsuarios(id, contraseña, cargo);
-                VentanaGestionUsuarios va = new VentanaGestionUsuarios (modeloClientes, usuarioActual);
+                int idcolegio = Integer.parseInt(Cambio1.getText());
+                String nombre = Cambio2.getText();
+                modeloClientes.editarColegio(idcolegio, nombre);
+                VentanaGestionColegios va = new VentanaGestionColegios(modeloClientes, usuarioActual);
                 this.dispose();
                 va.setVisible(true);
             }
             else if (Modo == "Nuevo"){
-                // int id = Integer.parseInt(Cambio1.getText());
-                String contraseña = Cambio2.getText();
-                String cargo = Cambio3.getText();
-                modeloClientes.agregarUsuarios( contraseña, cargo);
-                VentanaGestionUsuarios va = new VentanaGestionUsuarios (modeloClientes, usuarioActual);
+                int idcolegio = Integer.parseInt(Cambio1.getText());
+                String nombre = Cambio2.getText();
+                modeloClientes.agregarColegio(idcolegio, nombre);
+                VentanaGestionColegios va = new VentanaGestionColegios(modeloClientes, usuarioActual);
                 this.dispose();
                 va.setVisible(true);
             }
         }
         else if (e.getSource() == Boton_cancelar) {
-            VentanaGestionUsuarios va = new VentanaGestionUsuarios (modeloClientes, usuarioActual);
+            VentanaGestionColegios va = new VentanaGestionColegios(modeloClientes, usuarioActual);
             this.dispose();
             va.setVisible(true);
         }

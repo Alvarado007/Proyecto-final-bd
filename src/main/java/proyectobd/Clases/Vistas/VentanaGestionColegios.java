@@ -9,19 +9,20 @@ import javax.swing.ImageIcon;
 import javax.swing.ListSelectionModel;
 
 import proyectobd.Clases.Modelos.Clientesbd;
+import proyectobd.Clases.Modelos.Colegiosbd;
+import proyectobd.Clases.Modelos.Colegiosbd;
 import proyectobd.Estetica.Botontransparente;
 import proyectobd.Estetica.Campotextotransparente;
 import proyectobd.Estetica.Labeltransparente;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
-public class VentanaGestionClientes extends javax.swing.JFrame implements ActionListener {
-    private Clientesbd modeloClientes;
+public class VentanaGestionColegios extends javax.swing.JFrame implements ActionListener {
+    private Colegiosbd modeloClientes;
     private String usuarioActual;
 
-    public VentanaGestionClientes(Clientesbd ventanaClientes, String usuarioActual) {
+    public VentanaGestionColegios(Colegiosbd ventanaClientes, String usuarioActual) {
         this.usuarioActual = usuarioActual;
         this.modeloClientes = ventanaClientes;
         initComponents();
@@ -32,7 +33,7 @@ public class VentanaGestionClientes extends javax.swing.JFrame implements Action
 
     @SuppressWarnings("unchecked")
     private void initComponents() {
-        String[] columnas = {"Dni", "Nombre", "Telefono"};
+        String[] columnas = {"id","nombre"};
         jPanel1 = new javax.swing.JPanel();
         Texto_buscar = new Campotextotransparente(1);
         Boton_buscar = new Botontransparente("Buscar");
@@ -40,8 +41,7 @@ public class VentanaGestionClientes extends javax.swing.JFrame implements Action
         Boton_nuevo = new Botontransparente("Nuevo");
         Boton_refrescar = new Botontransparente("Refrescar");
         Boton_regresar = new Botontransparente("Regresar");
-        Boton_eliminar = new Botontransparente("Eliminar");
-        Nombre_ventana = new Labeltransparente("Clientes");
+        Nombre_ventana = new Labeltransparente("Colegios");
         jLabel6 = new javax.swing.JLabel();
         modelo = new javax.swing.table.DefaultTableModel(null, columnas){
             @Override
@@ -99,14 +99,9 @@ public class VentanaGestionClientes extends javax.swing.JFrame implements Action
         jPanel1.add(Boton_refrescar);
 
         Boton_regresar.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-        Boton_regresar.setBounds(450, 580, 200, 50);
+        Boton_regresar.setBounds(235, 580, 200, 50);
         Boton_regresar.addActionListener(this);
         jPanel1.add(Boton_regresar);
-
-        Boton_eliminar.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-        Boton_eliminar.setBounds(20, 580, 200, 50);
-        Boton_eliminar.addActionListener(this);
-        jPanel1.add(Boton_eliminar);
 
         // jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         // jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectobd/Imagenes/Contraseña.png")));
@@ -119,7 +114,7 @@ public class VentanaGestionClientes extends javax.swing.JFrame implements Action
         Nombre_ventana.setBounds(70, 20, 120, 40);
         Nombre_ventana.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-        for (Object[] fila : modeloClientes.obtenerUsuarios()) {
+        for (Object[] fila : modeloClientes.obtenerColegio()) {
             modelo.addRow(fila);
         }
 
@@ -167,7 +162,7 @@ public class VentanaGestionClientes extends javax.swing.JFrame implements Action
     // public static void main(String args[]) {
     //     java.awt.EventQueue.invokeLater(new Runnable() {
     //         public void run() {
-    //             new VentanaGestionClientes().setVisible(true);
+    //             new VentanaGestionColegios().setVisible(true);
     //         }
     //     });
     // }
@@ -178,7 +173,6 @@ public class VentanaGestionClientes extends javax.swing.JFrame implements Action
     private javax.swing.JButton Boton_nuevo;
     private javax.swing.JButton Boton_refrescar;
     private javax.swing.JButton Boton_regresar;
-    private javax.swing.JButton Boton_eliminar;
     private javax.swing.JLabel Nombre_ventana;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
@@ -192,9 +186,9 @@ public class VentanaGestionClientes extends javax.swing.JFrame implements Action
     public void actionPerformed(ActionEvent e) {
         // TODO Auto-generated method stub
         if (e.getSource() == Boton_buscar) {
-            String cliente_buscar = Texto_buscar.getText();
+            int cliente_buscar = Integer.parseInt(Texto_buscar.getText());
             modelo.setRowCount(0);
-            for (Object[] fila : modeloClientes.BuscarCliente(cliente_buscar)) {
+            for (Object[] fila : modeloClientes.BuscarColegio(cliente_buscar)) {
                 modelo.addRow(fila);
             }
         }
@@ -204,7 +198,7 @@ public class VentanaGestionClientes extends javax.swing.JFrame implements Action
         // }
         else if (e.getSource() == Boton_refrescar) {
             modelo.setRowCount(0);
-            for (Object[] fila : modeloClientes.obtenerUsuarios()) {
+            for (Object[] fila : modeloClientes.obtenerColegio()) {
                 modelo.addRow(fila);
             }
         }
@@ -217,37 +211,21 @@ public class VentanaGestionClientes extends javax.swing.JFrame implements Action
 
         else if (e.getSource() == Boton_editar) {
             int fila = jTable1.getSelectedRow();
-            if (fila == -1) return;
-
-            ArrayList<String> datos = new ArrayList<>();
-
+            java.util.ArrayList<String> datos = new java.util.ArrayList<String>();
             for (int col = 0; col < jTable1.getColumnCount(); col++) {
                 datos.add(jTable1.getValueAt(fila, col).toString());
             }
             System.out.println(datos);
-            VentanaAgregarCliente va = new VentanaAgregarCliente(modeloClientes, "Editar", usuarioActual);
+            VentanaAgregarColegio va = new VentanaAgregarColegio(modeloClientes, "Editar",usuarioActual);
             va.setDatosActuales(datos);
             this.dispose();
             va.setVisible(true);
         }
 
         else if (e.getSource() == Boton_nuevo) {
-            VentanaAgregarCliente va = new VentanaAgregarCliente(modeloClientes, "Nuevo", usuarioActual);
+            VentanaAgregarColegio va = new VentanaAgregarColegio(modeloClientes, "Nuevo",usuarioActual);
             this.dispose();
             va.setVisible(true);
-        }
-
-        else if (e.getSource() == Boton_eliminar) {
-            int fila = jTable1.getSelectedRow();
-            if (fila == -1) return;
-
-            String dni_cliente = jTable1.getValueAt(fila, 0).toString();
-            modeloClientes.eliminarCliente(dni_cliente);
-
-            modelo.setRowCount(0);
-            for (Object[] fila2 : modeloClientes.obtenerUsuarios()) {
-                modelo.addRow(fila2);
-            }
         }
         
     }
