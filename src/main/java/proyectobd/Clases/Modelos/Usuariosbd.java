@@ -80,4 +80,16 @@ public class Usuariosbd {
             e.printStackTrace();
         }
     }
+
+    public void eliminarUsuarios(int id) {
+        try {
+            Connection con = DriverManager.getConnection(url, user, password);
+            PreparedStatement ps = con.prepareStatement("DELETE FROM Usuarios WHERE id = ?");
+            ps.setInt(1, id);
+            ps.executeUpdate();
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

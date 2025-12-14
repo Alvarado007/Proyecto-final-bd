@@ -40,6 +40,7 @@ public class VentanaGestionClientes extends javax.swing.JFrame implements Action
         Boton_nuevo = new Botontransparente("Nuevo");
         Boton_refrescar = new Botontransparente("Refrescar");
         Boton_regresar = new Botontransparente("Regresar");
+        Boton_eliminar = new Botontransparente("Eliminar");
         Nombre_ventana = new Labeltransparente("Clientes");
         jLabel6 = new javax.swing.JLabel();
         modelo = new javax.swing.table.DefaultTableModel(null, columnas){
@@ -98,9 +99,14 @@ public class VentanaGestionClientes extends javax.swing.JFrame implements Action
         jPanel1.add(Boton_refrescar);
 
         Boton_regresar.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-        Boton_regresar.setBounds(240, 580, 200, 50);
+        Boton_regresar.setBounds(450, 580, 200, 50);
         Boton_regresar.addActionListener(this);
         jPanel1.add(Boton_regresar);
+
+        Boton_eliminar.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+        Boton_eliminar.setBounds(20, 580, 200, 50);
+        Boton_eliminar.addActionListener(this);
+        jPanel1.add(Boton_eliminar);
 
         // jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         // jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectobd/Imagenes/Contraseña.png")));
@@ -172,6 +178,7 @@ public class VentanaGestionClientes extends javax.swing.JFrame implements Action
     private javax.swing.JButton Boton_nuevo;
     private javax.swing.JButton Boton_refrescar;
     private javax.swing.JButton Boton_regresar;
+    private javax.swing.JButton Boton_eliminar;
     private javax.swing.JLabel Nombre_ventana;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
@@ -228,6 +235,19 @@ public class VentanaGestionClientes extends javax.swing.JFrame implements Action
             VentanaAgregarCliente va = new VentanaAgregarCliente(modeloClientes, "Nuevo", usuarioActual);
             this.dispose();
             va.setVisible(true);
+        }
+
+        else if (e.getSource() == Boton_eliminar) {
+            int fila = jTable1.getSelectedRow();
+            if (fila == -1) return;
+
+            String dni_cliente = jTable1.getValueAt(fila, 0).toString();
+            modeloClientes.eliminarCliente(dni_cliente);
+
+            modelo.setRowCount(0);
+            for (Object[] fila2 : modeloClientes.obtenerUsuarios()) {
+                modelo.addRow(fila2);
+            }
         }
         
     }

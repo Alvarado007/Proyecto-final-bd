@@ -79,4 +79,15 @@ public class Clientesbd {
             e.printStackTrace();
         }
     }
+
+    public void eliminarCliente(String dni) {
+        try {
+            Connection con = DriverManager.getConnection(url, user, password);
+            PreparedStatement ps = con.prepareStatement("DELETE FROM Cliente WHERE dni = ?");
+            ps.setString(1, dni);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

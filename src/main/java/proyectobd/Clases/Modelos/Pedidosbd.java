@@ -98,4 +98,16 @@ public class Pedidosbd  {
             e.printStackTrace();
         }
     }
+
+    public void eliminarPedido(int numpedido) {
+        try {
+            Connection con = DriverManager.getConnection(url, user, password);
+            PreparedStatement ps = con.prepareStatement("DELETE FROM Pedido WHERE numpedido = ?");
+            ps.setInt(1, numpedido);
+            ps.executeUpdate();
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
