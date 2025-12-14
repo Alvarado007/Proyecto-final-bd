@@ -4,6 +4,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 public class Pedidosbd  {
@@ -57,6 +58,44 @@ public class Pedidosbd  {
             return datos;
         } catch (Exception e) {
             return null;
+        }
+    }
+
+    public void agregarPedido(int numpedido, String fechaencargo, String fechaentrega, int abono, String anotacion, String dni_cliente) {
+        try {
+            LocalDate fechaencargodate = LocalDate.parse(fechaencargo);
+            LocalDate entregaDate = LocalDate.parse(fechaentrega);
+            Connection con = DriverManager.getConnection(url, user, password);
+            PreparedStatement ps = con.prepareStatement("INSERT INTO Pedido (numpedido, fechaencargo, fechaentrega, abono, anotacion, dni_cliente) VALUES (?, ?, ?, ?, ?, ?)");
+            ps.setInt(1, numpedido);
+            ps.setObject(2,fechaencargodate);
+            ps.setObject(3, entregaDate);
+            ps.setInt(4, abono);
+            ps.setString(5, anotacion);
+            ps.setString(6, dni_cliente);
+            ps.executeUpdate();
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void editarPedido(int numpedido, String fechaencargo, String fechaentrega, int abono,  String anotacion, String dni_cliente) {
+        try {
+            LocalDate fechaencargodate = LocalDate.parse(fechaencargo);
+            LocalDate entregaDate = LocalDate.parse(fechaentrega);
+            Connection con = DriverManager.getConnection(url, user, password);
+            PreparedStatement ps = con.prepareStatement("UPDATE Pedido SET fechaencargo = ?, fechaentrega = ?, abono = ?, anotacion = ?, dni_cliente = ? WHERE numpedido = ?");
+            ps.setObject(1,fechaencargodate);
+            ps.setObject(2, entregaDate);
+            ps.setInt(3, abono);
+            ps.setString(4, anotacion);
+            ps.setString(5, dni_cliente);
+            ps.setInt(6, numpedido);
+            ps.executeUpdate();
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

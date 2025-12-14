@@ -205,6 +205,25 @@ public class VentanaGestionFacturas extends javax.swing.JFrame implements Action
             this.dispose();
             vm.setVisible(true);
         }
+
+        else if (e.getSource() == Boton_editar) {
+            int fila = jTable1.getSelectedRow();
+            java.util.ArrayList<String> datos = new java.util.ArrayList<String>();
+            for (int col = 0; col < jTable1.getColumnCount(); col++) {
+                datos.add(jTable1.getValueAt(fila, col).toString());
+            }
+            System.out.println(datos);
+            VentanaAgregarFactura va = new VentanaAgregarFactura(modeloClientes, "Editar");
+            va.setDatosActuales(datos);
+            this.dispose();
+            va.setVisible(true);
+        }
+
+        else if (e.getSource() == Boton_nuevo) {
+            VentanaAgregarFactura va = new VentanaAgregarFactura(modeloClientes, "Nuevo");
+            this.dispose();
+            va.setVisible(true);
+        }
         
     }
     

@@ -10,9 +10,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 import proyectobd.Clases.Modelos.Clientesbd;
+import proyectobd.Clases.Modelos.Colegiosbd;
 import proyectobd.Clases.Modelos.Facturacionbd;
 import proyectobd.Clases.Modelos.Login;
 import proyectobd.Clases.Modelos.Pedidosbd;
+import proyectobd.Clases.Modelos.Proveedoresbd;
+import proyectobd.Clases.Modelos.Uniformesbd;
 import proyectobd.Estetica.Botontransparente;
 import proyectobd.Estetica.Labeltransparente;
 
@@ -210,6 +213,33 @@ public class VentanaMenu extends javax.swing.JFrame implements ActionListener {
             this.dispose();
             va.setVisible(true);
         }
+
+        else if (e.getSource() == Colegios) {
+            Colegiosbd modeloClientes = new Colegiosbd();
+            VentanaGestionColegios va = new VentanaGestionColegios(modeloClientes);
+            this.dispose();
+            va.setVisible(true);
+        }
+
+        // else if (e.getSource() == Materias_primas) {
+        //     Materias_primasbd modeloClientes = new Materias_primasbd();
+        //     VentanaGestionMaterias_primas va = new VentanaGestionMaterias_primas(modeloClientes);
+        //     this.dispose();
+        //     va.setVisible(true);
+        // }
+
+        else if (e.getSource() == Uniformes) {
+            Uniformesbd modeloClientes = new Uniformesbd();
+            VentanaGestionUniformes va = new VentanaGestionUniformes(modeloClientes);
+            this.dispose();
+            va.setVisible(true);
+        }
         
+        else if (e.getSource() == Proveedores) {
+            Proveedoresbd modeloClientes = new Proveedoresbd();
+            VentanaGestionProveedores va = new VentanaGestionProveedores(modeloClientes);
+            this.dispose();
+            va.setVisible(true);
+        }
     }
 }

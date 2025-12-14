@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-public class Clientesbd {
+public class Usuariosbd {
     private String url = "jdbc:postgresql://localhost:5432/pruebaproyecto";
     private String user = "postgres";
     private String password = "1234";
@@ -15,14 +15,14 @@ public class Clientesbd {
         List<Object[]> datos = new ArrayList<>();
         try{
             Connection con = DriverManager.getConnection(url, user, password);
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM Cliente");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM Usuarios");
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
                 datos.add(new Object[]{
-                    rs.getString("dni"),
-                    rs.getString("nombre"),
-                    rs.getString("tel"),
+                        rs.getInt("id"),
+                        rs.getString("contraseña"),
+                        rs.getString("cargo"),
                 });
             }
 
@@ -32,19 +32,19 @@ public class Clientesbd {
         }
     }
 
-    public List<Object[]> BuscarCliente(String dni) {
+    public List<Object[]> BuscarUsuarios(int id) {
         List<Object[]> datos = new ArrayList<>();
         try{
             Connection con = DriverManager.getConnection(url, user, password);
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM Cliente WHERE dni = ?");
-            ps.setString(1, dni);
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM Usuarios WHERE id = ?");
+            ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
                 datos.add(new Object[]{
-                    rs.getString("dni"),
-                    rs.getString("nombre"),
-                    rs.getString("tel"),
+                        rs.getInt("id"),
+                        rs.getString("contraseña"),
+                        rs.getString("cargo"),
                 });
             }
 
@@ -54,27 +54,28 @@ public class Clientesbd {
         }
     }
 
-    public void agregarCliente(String dni, String nombre, String tel) {
+    public void agregarUsuarios(String contraseña, String cargo) {
         try {
             Connection con = DriverManager.getConnection(url, user, password);
-            PreparedStatement ps = con.prepareStatement("INSERT INTO Cliente (dni, nombre, tel) VALUES (?, ?, ?)");
-            ps.setString(1, dni);
-            ps.setString(2, nombre);
-            ps.setString(3, tel);
+            PreparedStatement ps = con.prepareStatement("INSERT INTO Usuarios (contraseña, cargo) VALUES (?, ?)");
+            ps.setString(1, contraseña);
+            ps.setString(2, cargo);
             ps.executeUpdate();
+            con.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void editarCliente(String dni, String nombre, String tel) {
+    public void editarUsuarios(int id, String contraseña, String cargo) {
         try {
             Connection con = DriverManager.getConnection(url, user, password);
-            PreparedStatement ps = con.prepareStatement("UPDATE Cliente SET nombre = ?, tel = ? WHERE dni = ?");
-            ps.setString(1, nombre);
-            ps.setString(2, tel);
-            ps.setString(3, dni);
+            PreparedStatement ps = con.prepareStatement("UPDATE Usuarios SET contraseña = ?, cargo = ? WHERE id = ?");
+            ps.setString(1, contraseña);
+            ps.setString(2, cargo);
+            ps.setInt(3, id);
             ps.executeUpdate();
+            con.close();
         } catch (Exception e) {
             e.printStackTrace();
         }

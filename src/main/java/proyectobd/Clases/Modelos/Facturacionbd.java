@@ -55,5 +55,35 @@ public class Facturacionbd {
             return null;
         }
     }
+
+    public void agregarFactura(int idfactura, String estado, int total, int numpedido) {
+        try {
+            Connection con = DriverManager.getConnection(url, user, password);
+            PreparedStatement ps = con.prepareStatement("INSERT INTO Factura (idfactura, estado, total, numpedido) VALUES (?, ?, ?, ?)");
+            ps.setInt(1, idfactura);
+            ps.setString(2, estado);
+            ps.setInt(3, total);
+            ps.setInt(4, numpedido);
+            ps.executeUpdate();
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void editarFactura(int idfactura, String estado, int total, int numpedido) {
+        try {
+            Connection con = DriverManager.getConnection(url, user, password);
+            PreparedStatement ps = con.prepareStatement("UPDATE Factura SET estado = ?, total = ?, numpedido = ? WHERE idfactura = ?");
+            ps.setString(1, estado);
+            ps.setInt(2, total);
+            ps.setInt(3, numpedido);
+            ps.setInt(4, idfactura);
+            ps.executeUpdate();
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
 

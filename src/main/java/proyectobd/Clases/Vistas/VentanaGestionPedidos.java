@@ -15,6 +15,7 @@ import proyectobd.Estetica.Labeltransparente;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class VentanaGestionPedidos extends javax.swing.JFrame implements ActionListener {
     private Pedidosbd modeloPedidos;
@@ -203,6 +204,28 @@ public class VentanaGestionPedidos extends javax.swing.JFrame implements ActionL
             VentanaMenu vm = new VentanaMenu();
             this.dispose();
             vm.setVisible(true);
+        }
+
+        else if (e.getSource() == Boton_editar) {
+            int fila = jTable1.getSelectedRow();
+            if (fila == -1) return;
+
+            ArrayList<String> datos = new ArrayList<>();
+
+            for (int col = 0; col < jTable1.getColumnCount(); col++) {
+                datos.add(jTable1.getValueAt(fila, col).toString());
+            }
+            System.out.println(datos);
+            VentanaAgregarPedido va = new VentanaAgregarPedido(modeloPedidos, "Editar");
+            va.setDatosActuales(datos);
+            this.dispose();
+            va.setVisible(true);
+        }
+
+        else if (e.getSource() == Boton_nuevo) {
+            VentanaAgregarPedido va = new VentanaAgregarPedido(modeloPedidos, "Nuevo");
+            this.dispose();
+            va.setVisible(true);
         }
         
     }
