@@ -59,6 +59,7 @@ public class VentanaAgregarUniforme extends javax.swing.JFrame implements Action
         Cambio5 = new Campotextotransparente(1);
         Cambio6 = new Campotextotransparente(1);
         Cambio7 = new Campotextotransparente(1);
+        Cambio8 = new Campotextotransparente(1);
         Boton_guardar = new Botontransparente("Guardar");
         Boton_cancelar = new Botontransparente("Cancelar");
         Nombre_ventana = new Labeltransparente("Uniformes");
@@ -69,6 +70,7 @@ public class VentanaAgregarUniforme extends javax.swing.JFrame implements Action
         Label_cambio5 = new Labeltransparente("Bordado");
         Label_cambio6 = new Labeltransparente("Escudo");
         Label_cambio7 = new Labeltransparente("Id Colegio");
+        Label_cambio8 = new Labeltransparente("Terminado");
         jLabel6 = new javax.swing.JLabel();
 
 
@@ -126,6 +128,11 @@ public class VentanaAgregarUniforme extends javax.swing.JFrame implements Action
         Cambio7.setForeground(Color.BLACK);
         Cambio7.setBounds(340, 450, 190, 50);
         jPanel1.add(Cambio7);
+
+        Cambio8.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        Cambio8.setForeground(Color.BLACK);
+        Cambio8.setBounds(340, 510, 190, 50);
+        jPanel1.add(Cambio8);
 
 
         Boton_guardar.setFont(new Font("Segoe UI", Font.PLAIN, 16));
@@ -195,6 +202,12 @@ public class VentanaAgregarUniforme extends javax.swing.JFrame implements Action
         Label_cambio7.setBounds(140, 450, 190, 50);
         Label_cambio7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
+        Label_cambio8.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        Label_cambio8.setForeground(Color.BLACK);
+        jPanel1.add(Label_cambio8);
+        Label_cambio8.setBounds(140, 510, 190, 50);
+        Label_cambio8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
         
         
         jLabel6.setMaximumSize(new java.awt.Dimension(675, 675));
@@ -236,6 +249,7 @@ public class VentanaAgregarUniforme extends javax.swing.JFrame implements Action
     private javax.swing.JLabel Label_cambio5;
     private javax.swing.JLabel Label_cambio6;
     private javax.swing.JLabel Label_cambio7;
+    private javax.swing.JLabel Label_cambio8;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField Cambio1;
@@ -245,6 +259,7 @@ public class VentanaAgregarUniforme extends javax.swing.JFrame implements Action
     private javax.swing.JTextField Cambio5;
     private javax.swing.JTextField Cambio6;
     private javax.swing.JTextField Cambio7;
+    private javax.swing.JTextField Cambio8;
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -271,7 +286,9 @@ public class VentanaAgregarUniforme extends javax.swing.JFrame implements Action
                 String Bordado = Cambio5.getText();
                 String Escudo = Cambio6.getText();
                 int idcolegio = Integer.parseInt(Cambio7.getText());
+                String [] Terminados = Cambio8.getText().split(",");
                 modeloClientes.agregarUniforme(codUniforme, tipo, color, tipo_tela, Bordado, Escudo, idcolegio);
+                modeloClientes.Producto_uniforme(codUniforme, Terminados);
                 VentanaGestionUniformes va = new VentanaGestionUniformes(modeloClientes, usuarioActual);
                 this.dispose();
                 va.setVisible(true);

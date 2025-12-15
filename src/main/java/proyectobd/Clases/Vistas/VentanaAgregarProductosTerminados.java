@@ -61,6 +61,8 @@ public class VentanaAgregarProductosTerminados extends javax.swing.JFrame implem
         Cambio4 = new Campotextotransparente(1);
         Cambio5 = new Campotextotransparente(1);
         Cambio6 = new Campotextotransparente(1);
+        Cambio7 = new Campotextotransparente(1);
+        Cambio8 = new Campotextotransparente(1);
         Boton_guardar = new Botontransparente("Guardar");
         Boton_cancelar = new Botontransparente("Cancelar");
         Nombre_ventana = new Labeltransparente("Productos Terminados");
@@ -70,7 +72,8 @@ public class VentanaAgregarProductosTerminados extends javax.swing.JFrame implem
         Label_cambio4 = new Labeltransparente("Sexo");
         Label_cambio5 = new Labeltransparente("Precio");
         Label_cambio6 = new Labeltransparente("Num Pedido");
-
+        Label_cambio7 = new Labeltransparente("Materia Prima");
+        Label_cambio8 = new Labeltransparente("Uniforme");
         
         jLabel6 = new javax.swing.JLabel();
 
@@ -124,6 +127,16 @@ public class VentanaAgregarProductosTerminados extends javax.swing.JFrame implem
         Cambio6.setForeground(Color.BLACK);
         Cambio6.setBounds(340, 390, 190, 50);
         jPanel1.add(Cambio6);
+
+        Cambio7.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        Cambio7.setForeground(Color.BLACK);
+        Cambio7.setBounds(340, 450, 190, 50);
+        jPanel1.add(Cambio7);
+
+        Cambio8.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        Cambio8.setForeground(Color.BLACK);
+        Cambio8.setBounds(340, 510, 190, 50);
+        jPanel1.add(Cambio8);
 
         
 
@@ -189,6 +202,18 @@ public class VentanaAgregarProductosTerminados extends javax.swing.JFrame implem
         Label_cambio6.setBounds(140, 390, 190, 50);
         Label_cambio6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
+        Label_cambio7.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        Label_cambio7.setForeground(Color.BLACK);
+        jPanel1.add(Label_cambio7);
+        Label_cambio7.setBounds(140, 450, 190, 50);
+        Label_cambio7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        Label_cambio8.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        Label_cambio8.setForeground(Color.BLACK);
+        jPanel1.add(Label_cambio8);
+        Label_cambio8.setBounds(140, 510, 190, 50);
+        Label_cambio8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
         
         
         jLabel6.setMaximumSize(new java.awt.Dimension(675, 675));
@@ -229,6 +254,8 @@ public class VentanaAgregarProductosTerminados extends javax.swing.JFrame implem
     private javax.swing.JLabel Label_cambio4;
     private javax.swing.JLabel Label_cambio5;
     private javax.swing.JLabel Label_cambio6;
+    private javax.swing.JLabel Label_cambio7;
+    private javax.swing.JLabel Label_cambio8;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField Cambio1;
@@ -237,6 +264,8 @@ public class VentanaAgregarProductosTerminados extends javax.swing.JFrame implem
     private javax.swing.JTextField Cambio4;
     private javax.swing.JTextField Cambio5;
     private javax.swing.JTextField Cambio6;
+    private javax.swing.JTextField Cambio7;
+    private javax.swing.JTextField Cambio8;
     // End of variables declaration
 
 
@@ -263,7 +292,11 @@ public class VentanaAgregarProductosTerminados extends javax.swing.JFrame implem
                 String sexo = Cambio4.getText();
                 BigDecimal precio = new BigDecimal(Cambio5.getText());
                 int num_pedido = Integer.parseInt(Cambio6.getText());
+                String [] Materias_Primas = Cambio7.getText().split(",");
+                String [] uniforme = Cambio8.getText().split(",");
                 modeloClientes.agregarProductosTerminados(codigo, descripcion, talla, sexo, precio, num_pedido);
+                modeloClientes.Es_hecho(codigo, Materias_Primas);
+                modeloClientes.Producto_uniforme(codigo, uniforme);
                 VentanaGestionProductosTerminados va = new VentanaGestionProductosTerminados(modeloClientes, usuarioActual);
                 this.dispose();
                 va.setVisible(true);

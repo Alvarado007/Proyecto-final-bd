@@ -94,4 +94,35 @@ public class ProductosTerminadosbd {
             e.printStackTrace();
         }
     }
+    public void Es_hecho (int codigo_terminado, String [] Materias_Primas){
+        try {
+            Connection con = DriverManager.getConnection(url, user, password);
+            PreparedStatement ps = con.prepareStatement("INSERT INTO Es_hecho (codigoproductoterminado, codigo_materia) VALUES (?, ?)");
+            for (String Prima : Materias_Primas) {
+                int materiaprima = Integer.parseInt(Prima);
+                ps.setInt(1, codigo_terminado);
+                ps.setInt(2, materiaprima);
+                ps.executeUpdate();
+            }
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void Producto_uniforme(int codigo_terminado, String [] uniforme){
+        try {
+            Connection con = DriverManager.getConnection(url, user, password);
+            PreparedStatement ps = con.prepareStatement("INSERT INTO producto_uniforme (codigoproductoterminado, codproductouniforme) VALUES (?, ?)");
+            for (String Prima : uniforme) {
+                int materiaprima = Integer.parseInt(Prima);
+                ps.setInt(1, codigo_terminado);
+                ps.setInt(2, materiaprima);
+                ps.executeUpdate();
+            }
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

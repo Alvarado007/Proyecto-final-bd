@@ -89,4 +89,35 @@ public class MateriasPrimasbd {
             e.printStackTrace();
         }
     }
+
+    public void Suministra (String [] nit, int materias){
+        try {
+            Connection con = DriverManager.getConnection(url, user, password);
+            PreparedStatement ps = con.prepareStatement("INSERT INTO Suministra (NIT_Proveedor, codigo_materia) VALUES (?, ?)");
+            for (String proveedor : nit) {
+                ps.setString(1, proveedor);
+                ps.setInt(2, materias);
+                ps.executeUpdate();
+            }
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void Es_hecho (int materias, String [] codigo_terminados){
+        try {
+            Connection con = DriverManager.getConnection(url, user, password);
+            PreparedStatement ps = con.prepareStatement("INSERT INTO Es_hecho (codigoproductoterminado, codigo_materia) VALUES (?, ?)");
+            for (String terminado : codigo_terminados) {
+                int terminadoInt = Integer.parseInt(terminado);
+                ps.setInt(1, terminadoInt);
+                ps.setInt(2, materias);
+                ps.executeUpdate();
+            }
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

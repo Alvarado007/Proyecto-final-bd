@@ -97,4 +97,20 @@ public class Uniformesbd {
             e.printStackTrace();
         }
     }
+
+    public void Producto_uniforme(int uniforme, String [] terminados){
+        try {
+            Connection con = DriverManager.getConnection(url, user, password);
+            PreparedStatement ps = con.prepareStatement("INSERT INTO producto_uniforme (codigoproductoterminado, codproductouniforme) VALUES (?, ?)");
+            for (String Prima : terminados) {
+                int materiaprima = Integer.parseInt(Prima);
+                ps.setInt(1,materiaprima );
+                ps.setInt(2, uniforme);
+                ps.executeUpdate();
+            }
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

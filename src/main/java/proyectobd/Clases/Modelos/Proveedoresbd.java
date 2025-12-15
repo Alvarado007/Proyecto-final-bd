@@ -89,4 +89,20 @@ public class Proveedoresbd {
             e.printStackTrace();
         }
     }
+
+    public void Suministra(String[] materias, String nit) {
+        try {
+            Connection con = DriverManager.getConnection(url, user, password);
+            PreparedStatement ps = con.prepareStatement("INSERT INTO Suministra (NIT_Proveedor, codigo_materia) VALUES (?, ?)");
+            for (String materia : materias) {
+                int materiaInt = Integer.parseInt(materia);
+                ps.setString(1, nit);
+                ps.setInt(2, materiaInt);
+                ps.executeUpdate();
+            }
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

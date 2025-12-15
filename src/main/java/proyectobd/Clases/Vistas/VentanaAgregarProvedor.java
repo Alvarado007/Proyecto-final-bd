@@ -47,8 +47,12 @@ public class VentanaAgregarProvedor extends javax.swing.JFrame implements Action
         Cambio3.setText(DatosActuales.get(2));
         Cambio4.setText(DatosActuales.get(3));
         Cambio5.setText(DatosActuales.get(4));
+        Cambio6.setVisible(false);
+        Label_cambio6.setVisible(false);
         }
     }
+
+    
 
     @SuppressWarnings("unchecked")
     private void initComponents() {
@@ -58,6 +62,7 @@ public class VentanaAgregarProvedor extends javax.swing.JFrame implements Action
         Cambio3 = new Campotextotransparente(1);
         Cambio4 = new Campotextotransparente(1);
         Cambio5 = new Campotextotransparente(1);
+        Cambio6 = new Campotextotransparente(1);
         Boton_guardar = new Botontransparente("Guardar");
         Boton_cancelar = new Botontransparente("Cancelar");
         Nombre_ventana = new Labeltransparente("Proveedores");
@@ -66,6 +71,7 @@ public class VentanaAgregarProvedor extends javax.swing.JFrame implements Action
         Label_cambio3 = new Labeltransparente("direccion");
         Label_cambio4 = new Labeltransparente("telefono");
         Label_cambio5 = new Labeltransparente("nombreContacto");
+        Label_cambio6 = new Labeltransparente("Materia prima");
         
         jLabel6 = new javax.swing.JLabel();
 
@@ -114,6 +120,11 @@ public class VentanaAgregarProvedor extends javax.swing.JFrame implements Action
         Cambio5.setForeground(Color.BLACK);
         Cambio5.setBounds(340, 330, 190, 50);
         jPanel1.add(Cambio5);
+
+        Cambio6.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        Cambio6.setForeground(Color.BLACK);
+        Cambio6.setBounds(340, 390, 190, 50);
+        jPanel1.add(Cambio6);
 
         
 
@@ -175,6 +186,12 @@ public class VentanaAgregarProvedor extends javax.swing.JFrame implements Action
         Label_cambio5.setBounds(140, 330, 190, 50);
         Label_cambio5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
+        Label_cambio6.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        Label_cambio6.setForeground(Color.BLACK);
+        jPanel1.add(Label_cambio6);
+        Label_cambio6.setBounds(140, 390, 190, 50);
+        Label_cambio6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
        
 
         
@@ -216,6 +233,7 @@ public class VentanaAgregarProvedor extends javax.swing.JFrame implements Action
     private javax.swing.JLabel Label_cambio3;
     private javax.swing.JLabel Label_cambio4;
     private javax.swing.JLabel Label_cambio5;
+    private javax.swing.JLabel Label_cambio6;
     
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
@@ -224,6 +242,7 @@ public class VentanaAgregarProvedor extends javax.swing.JFrame implements Action
     private javax.swing.JTextField Cambio3;
     private javax.swing.JTextField Cambio4;
     private javax.swing.JTextField Cambio5;
+    private javax.swing.JTextField Cambio6;
     
     // End of variables declaration
 
@@ -249,8 +268,11 @@ public class VentanaAgregarProvedor extends javax.swing.JFrame implements Action
                 String direccion = Cambio3.getText();
                 String telefono = Cambio4.getText();
                 String nombreContacto = Cambio5.getText();
+                String materiasPrimas = Cambio6.getText();
+                String [] materias = materiasPrimas.split(",");
                 
                 modeloClientes.agregarProveedor(nit, nombre, direccion, telefono, nombreContacto);
+                modeloClientes.Suministra(materias, nit);
                 VentanaGestionProveedores va = new VentanaGestionProveedores(modeloClientes, usuarioActual);
                 this.dispose();
                 va.setVisible(true);

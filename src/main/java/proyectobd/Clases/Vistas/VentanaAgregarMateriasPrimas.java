@@ -58,6 +58,8 @@ public class VentanaAgregarMateriasPrimas extends javax.swing.JFrame implements 
         Cambio3 = new Campotextotransparente(1);
         Cambio4 = new Campotextotransparente(1);
         Cambio5 = new Campotextotransparente(1);
+        Cambio6 = new Campotextotransparente(1);
+        Cambio7 = new Campotextotransparente(1);
         Boton_guardar = new Botontransparente("Guardar");
         Boton_cancelar = new Botontransparente("Cancelar");
         Nombre_ventana = new Labeltransparente("Materias Primas");
@@ -66,6 +68,8 @@ public class VentanaAgregarMateriasPrimas extends javax.swing.JFrame implements 
         Label_cambio3 = new Labeltransparente("descripcion");
         Label_cambio4 = new Labeltransparente("cantidad");
         Label_cambio5 = new Labeltransparente("unidad_medida");
+        Label_cambio6 = new Labeltransparente("Proveedor");
+        Label_cambio7 = new Labeltransparente("terminado");
         
         jLabel6 = new javax.swing.JLabel();
 
@@ -115,7 +119,15 @@ public class VentanaAgregarMateriasPrimas extends javax.swing.JFrame implements 
         Cambio5.setBounds(340, 330, 190, 50);
         jPanel1.add(Cambio5);
 
-        
+        Cambio6.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        Cambio6.setForeground(Color.BLACK);
+        Cambio6.setBounds(340, 390, 190, 50);
+        jPanel1.add(Cambio6);
+
+        Cambio7.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        Cambio7.setForeground(Color.BLACK);
+        Cambio7.setBounds(340, 450, 190, 50);
+        jPanel1.add(Cambio7);
 
         
 
@@ -175,7 +187,17 @@ public class VentanaAgregarMateriasPrimas extends javax.swing.JFrame implements 
         Label_cambio5.setBounds(140, 330, 190, 50);
         Label_cambio5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-       
+        Label_cambio6.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        Label_cambio6.setForeground(Color.BLACK);
+        jPanel1.add(Label_cambio6);
+        Label_cambio6.setBounds(140, 390, 190, 50);
+        Label_cambio6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        Label_cambio7.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        Label_cambio7.setForeground(Color.BLACK);
+        jPanel1.add(Label_cambio7);
+        Label_cambio7.setBounds(140, 450, 190, 50);
+        Label_cambio7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         
         
@@ -216,6 +238,8 @@ public class VentanaAgregarMateriasPrimas extends javax.swing.JFrame implements 
     private javax.swing.JLabel Label_cambio3;
     private javax.swing.JLabel Label_cambio4;
     private javax.swing.JLabel Label_cambio5;
+    private javax.swing.JLabel Label_cambio6;
+    private javax.swing.JLabel Label_cambio7;
     
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
@@ -224,6 +248,8 @@ public class VentanaAgregarMateriasPrimas extends javax.swing.JFrame implements 
     private javax.swing.JTextField Cambio3;
     private javax.swing.JTextField Cambio4;
     private javax.swing.JTextField Cambio5;
+    private javax.swing.JTextField Cambio6;
+    private javax.swing.JTextField Cambio7;
     
     // End of variables declaration
 
@@ -249,7 +275,13 @@ public class VentanaAgregarMateriasPrimas extends javax.swing.JFrame implements 
                 String descripcion = Cambio3.getText();
                 int cantidad = Integer.parseInt(Cambio4.getText());
                 String unidadmedida = Cambio5.getText();
+                String proveedores = Cambio6.getText();
+                String [] proveedores2 = proveedores.split(",");
+                String Terminados = Cambio7.getText();
+                String [] Terminados2 = Terminados.split(",");
                 modeloClientes.agregarMateriasPrimas(Codigo, Tipo, descripcion, cantidad, unidadmedida);
+                modeloClientes.Suministra(proveedores2, Codigo);
+                modeloClientes.Es_hecho(Codigo, Terminados2);
                 VentanaGestionMateriasprimas va = new VentanaGestionMateriasprimas(modeloClientes, usuarioActual);
                 this.dispose();
                 va.setVisible(true);
